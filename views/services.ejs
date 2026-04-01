@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des Services</title>
+</head>
+<body>
+    <h1>Services</h1>
+    <ul>
+        <% resultatServices.forEach(service => { %>
+            <li><%= service.nom_service %> - Responsable: <%= service.responsable %></li>
+        <% }) %>
+    </ul>
+    <a href="/api/accueil">Retour à l'accueil</a>
+</body>
+</html>
+
+<h2>Ajouter un Service</h2>
+
+<!-- Formulaire qui envoie les données à la route POST /api/services -->
+<form action="/api/services" method="POST">
+    <!-- Champ pour le nom du service -->
+    <input type="text" name="nom_service" placeholder="Nom du service" required><br>
+
+    <!-- Champ pour le responsable du service -->
+    <input type="text" name="responsable" placeholder="Responsable" required><br>
+
+    <!-- Champ pour la capacité du service -->
+    <input type="number" name="capacite" placeholder="Capacité" required><br>
+
+    <!-- Bouton pour envoyer le formulaire -->
+    <button type="submit">Ajouter Service</button>
+</form>

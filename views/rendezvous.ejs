@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Rendez-vous</title>
+</head>
+<body>
+    <!-- Titre de la page -->
+    <h1>Rendez-vous</h1>
+
+    <!-- Liste des rendez-vous existants -->
+    <ul>
+        <% if (resultatRdv && resultatRdv.length > 0) { %>
+            <% resultatRdv.forEach(rdv => { %>
+                <li>
+                    Patient ID: <%= rdv.patient_id %>, 
+                    Médecin ID: <%= rdv.medecin_id %>, 
+                    Date: <%= rdv.date_rdv %>, 
+                    Motif: <%= rdv.motif %>, 
+                    Statut: <%= rdv.statut %>
+                </li>
+            <% }) %>
+        <% } else { %>
+            <li>Aucun rendez-vous pour le moment</li>
+        <% } %>
+    </ul>
+
+    <!-- Lien retour vers la page d'accueil -->
+    <a href="/api/accueil">Retour à l'accueil</a>
+
+    <hr>
+
+    <!-- Formulaire pour ajouter un nouveau rendez-vous -->
+    <h2>Ajouter un Rendez-vous</h2>
+    <form action="/api/rendezvous" method="POST">
+        <!-- ID du patient -->
+        <input type="number" name="patient_id" placeholder="ID du patient" required><br>
+
+        <!-- ID du médecin -->
+        <input type="number" name="medecin_id" placeholder="ID du médecin" required><br>
+
+        <!-- Date et heure du rendez-vous -->
+        <input type="datetime-local" name="date_rdv" placeholder="Date et heure" required><br>
+
+        <!-- Motif du rendez-vous -->
+        <input type="text" name="motif" placeholder="Motif" required><br>
+
+        <!-- Statut du rendez-vous -->
+        <input type="text" name="statut" placeholder="Statut" required><br>
+
+        <!-- Bouton d'envoi -->
+        <button type="submit">Ajouter Rendez-vous</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "name": "medicalinfo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "serveur.js",
+  "scripts": {
+    "start": "node serveur.js",
+    "dev": "nodemon serveur.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anzlatimohamed404-prog/Medicalinfo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/anzlatimohamed404-prog/Medicalinfo/issues"
+  },
+  "homepage": "https://github.com/anzlatimohamed404-prog/Medicalinfo#readme",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.2.1",
+    "express-myconnection": "^1.0.4",
+    "mysql2": "^3.20.0"
+  }
+}

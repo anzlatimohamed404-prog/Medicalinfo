@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Medicalinfo - Gestion des patients</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <header>
+    <h1>🏥 Medicalinfo</h1>
+    <p>Gestion des patients - Hôpital de Mamoudzou</p>
+  </header>
+
+  <main>
+
+    <!-- FORMULAIRE AJOUT -->
+    <section class="formulaire">
+      <h2>Ajouter un patient</h2>
+      <form action="/add-patient" method="POST">
+        <input type="text" name="name" placeholder="Nom complet" required />
+        <input type="number" name="age" placeholder="Âge" required />
+        <input type="text" name="condition" placeholder="État de santé" required />
+        <input type="text" name="medecin" placeholder="Médecin responsable" required />
+        <input type="date" name="dateEntree" required />
+        <button type="submit">➕ Ajouter</button>
+      </form>
+    </section>
+
+    <!-- RECHERCHE -->
+    <section class="recherche">
+      <h2>Rechercher un patient</h2>
+      <input type="text" id="recherche" placeholder="Rechercher par nom..." onkeyup="rechercher()" />
+    </section>
+
+    <!-- LISTE DES PATIENTS -->
+    <section class="liste">
+      <h2>Liste des patients (<%= patients.length %>)</h2>
+      <table id="tableau">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Âge</th>
+            <th>État de santé</th>
+            <th>Médecin</th>
+            <th>Date d'entrée</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% patients.forEach(patient => { %>
+          <tr>
+            <td><%= patient.name %></td>
+            <td><%= patient.age %></td>
+            <td><%= patient.condition %></td>
+            <td><%= patient.medecin %></td>
+            <td><%= patient.dateEntree %></td>
+            <td>
+              <button onclick="supprimer(<%= patient.id %>)">🗑️ Supprimer</button>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>
