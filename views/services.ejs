@@ -1,32 +1,155 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>Liste des Services</title>
+    <meta charset="UTF-8">
+    <!-- Encodage UTF-8 -->
+
+    <title>Services - Medicalinfo</title>
+    <!-- Titre de l'onglet -->
+
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Lien vers le fichier CSS -->
+
 </head>
 <body>
-    <h1>Services</h1>
-    <ul>
-        <% resultatServices.forEach(service => { %>
-            <li><%= service.nom_service %> - Responsable: <%= service.responsable %></li>
-        <% }) %>
-    </ul>
-    <a href="/api/accueil">Retour à l'accueil</a>
+
+    <!-- Barre de navigation -->
+    <nav>
+        <a href="/api/patients">👤 Patients</a>
+        <!-- Lien patients -->
+
+        <a href="/api/medecins">🩺 Médecins</a>
+        <!-- Lien médecins -->
+
+        <a href="/api/services">🏥 Services</a>
+        <!-- Lien services -->
+
+        <a href="/api/rendezvous">📅 Rendez-vous</a>
+        <!-- Lien rendez-vous -->
+    </nav>
+
+    <div class="container">
+    <!-- Conteneur principal -->
+
+        <h1>🏥 Services</h1>
+        <!-- Titre de la page -->
+
+        <table>
+        <!-- Tableau des services -->
+
+            <thead>
+            <!-- En-tête du tableau -->
+
+                <tr>
+                    <th>Nom du service</th>
+                    <!-- Colonne nom du service -->
+
+                    <th>Responsable</th>
+                    <!-- Colonne responsable -->
+
+                    <th>Capacité</th>
+                    <!-- Colonne capacité -->
+
+                    <th>Action</th>
+                    <!-- Colonne action -->
+                </tr>
+            </thead>
+
+            <tbody>
+            <!-- Corps du tableau -->
+
+                <% if (resultatServices && resultatServices.length > 0) { %>
+                <!-- Vérifie si des services existent -->
+
+                    <% resultatServices.forEach(service => { %>
+                    <!-- Parcourt chaque service -->
+
+                        <tr>
+
+                            <td><%= service.nom_service %></td>
+                            <!-- Affiche le nom du service -->
+
+                            <td><%= service.responsable %></td>
+                            <!-- Affiche le responsable -->
+
+                            <td>
+                                <span class="capacite-badge"><%= service.capacite %> lits</span>
+                                <!-- Badge orange pour la capacité -->
+                            </td>
+
+                            <td>
+                                <button class="btn-supprimer" onclick="supprimer(<%= service.id_service %>)">🗑️ Supprimer</button>
+                                <!-- Bouton supprimer -->
+                            </td>
+
+                        </tr>
+                        <!-- Fin de la ligne -->
+
+                    <% }) %>
+                    <!-- Fin de la boucle -->
+
+                <% } else { %>
+                <!-- Si aucun service -->
+
+                    <tr>
+                        <td colspan="4" style="text-align:center; color:#999;">
+                            Aucun service pour le moment
+                        </td>
+                        <!-- Message si liste vide -->
+                    </tr>
+
+                <% } %>
+                <!-- Fin du if/else -->
+
+            </tbody>
+
+        </table>
+        <!-- Fin du tableau -->
+
+        <h2>Ajouter un Service</h2>
+        <!-- Titre du formulaire -->
+
+        <form action="/api/services" method="POST">
+        <!-- Formulaire d'ajout -->
+
+            <input type="text" name="nom_service" placeholder="Nom du service" required>
+            <!-- Champ nom du service -->
+
+            <input type="text" name="responsable" placeholder="Responsable" required>
+            <!-- Champ responsable -->
+
+            <input type="number" name="capacite" placeholder="Capacité" required>
+            <!-- Champ capacité -->
+
+            <button type="submit">➕ Ajouter Service</button>
+            <!-- Bouton d'envoi -->
+
+        </form>
+        <!-- Fin du formulaire -->
+
+    </div>
+    <!-- Fin du conteneur -->
+
+    <script>
+
+        function supprimer(id) {
+        // Fonction de suppression d'un service
+
+            fetch(`/api/services/${id}`, { method: 'DELETE' })
+            // Envoie la requête DELETE avec l'id
+
+            .then(res => {
+            // Quand le serveur répond
+
+                if (res.ok) location.reload();
+                // Recharge la page si succès
+            })
+            .catch(err => alert("Erreur lors de la suppression"));
+            // Affiche une erreur si problème
+        }
+
+    </script>
+    <!-- Fin du script -->
+
 </body>
 </html>
-
-<h2>Ajouter un Service</h2>
-
-<!-- Formulaire qui envoie les données à la route POST /api/services -->
-<form action="/api/services" method="POST">
-    <!-- Champ pour le nom du service -->
-    <input type="text" name="nom_service" placeholder="Nom du service" required><br>
-
-    <!-- Champ pour le responsable du service -->
-    <input type="text" name="responsable" placeholder="Responsable" required><br>
-
-    <!-- Champ pour la capacité du service -->
-    <input type="number" name="capacite" placeholder="Capacité" required><br>
-
-    <!-- Bouton pour envoyer le formulaire -->
-    <button type="submit">Ajouter Service</button>
-</form>

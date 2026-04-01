@@ -1,35 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>Liste des Médecins</title>
+    <meta charset="UTF-8">
+    <title>Médecins - Medicalinfo</title>
+    <!-- Lien vers le fichier CSS -->
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <h1>Médecins</h1>
-    <ul>
-        <% resultatMedecins.forEach(medecin => { %>
-            <li><%= medecin.nom %> <%= medecin.prenom %> - <%= medecin.specialite %></li>
-        <% }) %>
-    </ul>
-    <a href="/api/accueil">Retour à l'accueil</a>
+
+    <!-- Barre de navigation -->
+    <nav>
+        <a href="/api/patients">👤 Patients</a>
+        <a href="/api/medecins">🩺 Médecins</a>
+        <a href="/api/services">🏥 Services</a>
+        <a href="/api/rendezvous">📅 Rendez-vous</a>
+    </nav>
+
+    <div class="container">
+
+        <h1>🩺 Médecins</h1>
+
+        <!-- Tableau des médecins -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Spécialité</th>
+                    <th>Service</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% resultatMedecins.forEach(medecin => { %>
+                <tr>
+                    <td><%= medecin.nom %></td>
+                    <td><%= medecin.prenom %></td>
+                    <td><%= medecin.specialite %></td>
+                    <td><%= medecin.service_affecte %></td>
+                    <td>
+                        <button class="btn-supprimer" onclick="supprimer(<%= medecin.id_medecin %>)">🗑️ Supprimer</button>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+        <h2>Ajouter un Médecin</h2>
+
+        <!-- Formulaire d'ajout -->
+        <form action="/api/medecins" method="POST">
+            <input type="text" name="nom" placeholder="Nom" required>
+            <input type="text" name="prenom" placeholder="Prénom" required>
+            <input type="text" name="specialite" placeholder="Spécialité" required>
+            <input type="text" name="service_affecte" placeholder="Service affecté" required>
+            <button type="submit">➕ Ajouter Médecin</button>
+        </form>
+
+    </div>
+
+    <script>
+        function supprimer(id) {
+            fetch(`/api/medecins/${id}`, { method: 'DELETE' })
+            .then(res => { if (res.ok) location.reload(); })
+            .catch(err => alert("Erreur lors de la suppression"));
+        }
+    </script>
+
 </body>
 </html>
-
-<h2>Ajouter un Médecin</h2>
-
-<!-- Formulaire qui envoie les données à la route POST /api/medecins -->
-<form action="/api/medecins" method="POST">
-    <!-- Champ pour le nom du médecin -->
-    <input type="text" name="nom" placeholder="Nom" required><br>
-
-    <!-- Champ pour le prénom du médecin -->
-    <input type="text" name="prenom" placeholder="Prénom" required><br>
-
-    <!-- Champ pour la spécialité du médecin -->
-    <input type="text" name="specialite" placeholder="Spécialité" required><br>
-
-    <!-- Champ pour le service où il est affecté -->
-    <input type="text" name="service_affecte" placeholder="Service affecté" required><br>
-
-    <!-- Bouton pour envoyer le formulaire -->
-    <button type="submit">Ajouter Médecin</button>
-</form>

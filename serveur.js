@@ -1,10 +1,10 @@
 
-// Ce fichier démarre le serveur HTTP pour Medicalinfo
-// Il importe l'application Express depuis app.js
+// Lance le serveur
 
 const app = require('./app');
 
 const PORT = 3000;
+
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Serveur lancé sur http://localhost:${PORT}`);
 });

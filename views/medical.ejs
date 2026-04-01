@@ -1,71 +1,177 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Medicalinfo - Gestion des patients</title>
-  <link rel="stylesheet" href="/css/style.css">
+    <meta charset="UTF-8">
+    <!-- Encodage UTF-8 pour les caractères spéciaux -->
+
+    <title>Medicalinfo - Gestion des patients</title>
+    <!-- Titre de la page affiché dans l'onglet du navigateur -->
+
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Lien vers le fichier CSS principal -->
 </head>
 <body>
 
-  <header>
-    <h1>🏥 Medicalinfo</h1>
-    <p>Gestion des patients - Hôpital de Mamoudzou</p>
-  </header>
+    <!-- ===================== HEADER ===================== -->
+    <header>
+        <h1>🏥 Medicalinfo</h1>
+        <!-- Titre principal de l'application -->
 
-  <main>
+        <p>Gestion des patients - Hôpital de Mamoudzou</p>
+        <!-- Sous-titre -->
+    </header>
 
-    <!-- FORMULAIRE AJOUT -->
-    <section class="formulaire">
-      <h2>Ajouter un patient</h2>
-      <form action="/add-patient" method="POST">
-        <input type="text" name="name" placeholder="Nom complet" required />
-        <input type="number" name="age" placeholder="Âge" required />
-        <input type="text" name="condition" placeholder="État de santé" required />
-        <input type="text" name="medecin" placeholder="Médecin responsable" required />
-        <input type="date" name="dateEntree" required />
-        <button type="submit">➕ Ajouter</button>
-      </form>
-    </section>
+    <!-- ===================== MAIN ===================== -->
+    <main>
 
-    <!-- RECHERCHE -->
-    <section class="recherche">
-      <h2>Rechercher un patient</h2>
-      <input type="text" id="recherche" placeholder="Rechercher par nom..." onkeyup="rechercher()" />
-    </section>
+        <!-- ===================== FORMULAIRE AJOUT ===================== -->
+        <section class="formulaire">
+            <h2>Ajouter un patient</h2>
+            <!-- Titre du formulaire -->
 
-    <!-- LISTE DES PATIENTS -->
-    <section class="liste">
-      <h2>Liste des patients (<%= patients.length %>)</h2>
-      <table id="tableau">
-        <thead>
-          <tr>
-            <th>Nom</th>
-            <th>Âge</th>
-            <th>État de santé</th>
-            <th>Médecin</th>
-            <th>Date d'entrée</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% patients.forEach(patient => { %>
-          <tr>
-            <td><%= patient.name %></td>
-            <td><%= patient.age %></td>
-            <td><%= patient.condition %></td>
-            <td><%= patient.medecin %></td>
-            <td><%= patient.dateEntree %></td>
-            <td>
-              <button onclick="supprimer(<%= patient.id %>)">🗑️ Supprimer</button>
-            </td>
-          </tr>
-          <% }) %>
-        </tbody>
-      </table>
-    </section>
+            <form action="/api/patients" method="POST">
+                <!-- Formulaire POST vers l'API pour ajouter un patient -->
 
-  </main>
+                <input type="text" name="nom" placeholder="Nom" required>
+                <!-- Champ nom obligatoire -->
 
-  <script src="/js/script.js"></script>
+                <input type="text" name="prenom" placeholder="Prénom" required>
+                <!-- Champ prénom obligatoire -->
+
+                <input type="date" name="date_naissance" placeholder="Date de naissance" required>
+                <!-- Champ date de naissance obligatoire -->
+
+                <select name="sexe" required>
+                    <!-- Menu déroulant sexe obligatoire -->
+                    <option value="">-- Sexe --</option>
+                    <option value="H">Homme</option>
+                    <option value="F">Femme</option>
+                </select>
+
+                <input type="date" name="date_admission" placeholder="Date d'admission" required>
+                <!-- Champ date d'admission obligatoire -->
+
+                <input type="text" name="service_affecte" placeholder="Service affecté" required>
+                <!-- Champ service obligatoire -->
+
+                <input type="text" name="statut" placeholder="Statut (ex: En cours)" required>
+                <!-- Champ statut obligatoire -->
+
+                <button type="submit">➕ Ajouter Patient</button>
+                <!-- Bouton pour envoyer le formulaire -->
+            </form>
+        </section>
+
+        <!-- ===================== RECHERCHE ===================== -->
+        <section class="recherche">
+            <h2>Rechercher un patient</h2>
+            <!-- Titre de la section recherche -->
+
+            <input type="text" id="recherche" placeholder="Rechercher par nom..." onkeyup="rechercher()" />
+            <!-- Input pour filtrer les patients à la saisie -->
+        </section>
+
+        <!-- ===================== LISTE DES PATIENTS ===================== -->
+        <section class="liste">
+            <h2>Liste des patients (<%= resultatPatients.length %>)</h2>
+            <!-- Affiche le nombre total de patients -->
+
+            <table id="tableau">
+                <!-- Tableau des patients -->
+
+                <thead>
+                    <!-- En-tête du tableau -->
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Date de naissance</th>
+                        <th>Sexe</th>
+                        <th>Date d'admission</th>
+                        <th>Service</th>
+                        <th>Statut</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% if (resultatPatients && resultatPatients.length > 0) { %>
+                    <!-- Vérifie s'il y a des patients -->
+
+                        <% resultatPatients.forEach(patient => { %>
+                        <!-- Parcourt chaque patient -->
+                        <tr>
+                            <td><%= patient.nom %></td>
+                            <!-- Nom du patient -->
+
+                            <td><%= patient.prenom %></td>
+                            <!-- Prénom du patient -->
+
+                            <td><%= new Date(patient.date_naissance).toLocaleDateString('fr-FR') %></td>
+                            <!-- Date de naissance formatée en français -->
+
+                            <td><%= patient.sexe === 'H' ? '👨 Homme' : '👩 Femme' %></td>
+                            <!-- Affiche Homme ou Femme avec emoji -->
+
+                            <td><%= new Date(patient.date_admission).toLocaleDateString('fr-FR') %></td>
+                            <!-- Date d'admission formatée en français -->
+
+                            <td><%= patient.service_affecte %></td>
+                            <!-- Service affecté -->
+
+                            <td>
+                                <span class="statut-badge"><%= patient.statut %></span>
+                                <!-- Badge coloré pour le statut -->
+                            </td>
+
+                            <td>
+                                <button class="btn-supprimer" onclick="supprimer(<%= patient.id_patient %>)">🗑️ Supprimer</button>
+                                <!-- Bouton pour supprimer un patient -->
+                            </td>
+                        </tr>
+                        <% }) %>
+                        <!-- Fin boucle patients -->
+
+                    <% } else { %>
+                    <!-- Si aucun patient trouvé -->
+                        <tr>
+                            <td colspan="8" style="text-align:center; color:#999;">
+                                Aucun patient pour le moment
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+
+    <!-- ===================== SCRIPT ===================== -->
+    <script>
+        // Fonction de suppression d'un patient
+        function supprimer(id) {
+            fetch(`/api/patients/${id}`, { method: 'DELETE' })
+            .then(res => {
+                if(res.ok) location.reload(); // Recharge la page si suppression réussie
+            })
+            .catch(err => alert("Erreur lors de la suppression"));
+        }
+
+        // Fonction de recherche dynamique
+        function rechercher() {
+            const input = document.getElementById("recherche").value.toLowerCase();
+            const rows = document.querySelectorAll("#tableau tbody tr");
+
+            rows.forEach(row => {
+                const nom = row.cells[0].textContent.toLowerCase();
+                const prenom = row.cells[1].textContent.toLowerCase();
+                if(nom.includes(input) || prenom.includes(input)){
+                    row.style.display = ""; // Affiche la ligne
+                } else {
+                    row.style.display = "none"; // Cache la ligne
+                }
+            });
+        }
+    </script>
+
 </body>
 </html>

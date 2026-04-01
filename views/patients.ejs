@@ -1,45 +1,84 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>Liste des Patients</title>
+    <meta charset="UTF-8">
+    <title>Patients - Medicalinfo</title>
+    <!-- Lien vers le fichier CSS -->
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <h1>Patients</h1>
-    <ul>
-        <% resultatPatients.forEach(patient => { %>
-            <li><%= patient.nom %> <%= patient.prenom %></li>
-        <% }) %>
-    </ul>
-    <a href="/api/accueil">Retour à l'accueil</a>
+
+    <!-- Barre de navigation -->
+    <nav>
+        <a href="/api/patients">👤 Patients</a>
+        <a href="/api/medecins">🩺 Médecins</a>
+        <a href="/api/services">🏥 Services</a>
+        <a href="/api/rendezvous">📅 Rendez-vous</a>
+    </nav>
+
+    <div class="container">
+
+        <h1>👤 Patients</h1>
+
+        <!-- Tableau des patients -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Date de naissance</th>
+                    <th>Sexe</th>
+                    <th>Admission</th>
+                    <th>Service</th>
+                    <th>Statut</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% resultatPatients.forEach(patient => { %>
+                <tr>
+                    <td><%= patient.nom %></td>
+                    <td><%= patient.prenom %></td>
+                    <td><%= patient.date_naissance %></td>
+                    <td><%= patient.sexe %></td>
+                    <td><%= patient.date_admission %></td>
+                    <td><%= patient.service_affecte %></td>
+                    <td><%= patient.statut %></td>
+                    <td>
+                        <button class="btn-supprimer" onclick="supprimer(<%= patient.id_patient %>)">🗑️ Supprimer</button>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+        <h2>Ajouter un Patient</h2>
+
+        <!-- Formulaire d'ajout -->
+        <form action="/api/patients" method="POST">
+            <input type="text" name="nom" placeholder="Nom" required>
+            <input type="text" name="prenom" placeholder="Prénom" required>
+            <input type="date" name="date_naissance" required>
+            <select name="sexe" required>
+                <option value="">-- Sexe --</option>
+                <option value="H">Homme</option>
+                <option value="F">Femme</option>
+            </select>
+            <input type="date" name="date_admission" required>
+            <input type="text" name="service_affecte" placeholder="Service affecté" required>
+            <input type="text" name="statut" placeholder="Statut" required>
+            <button type="submit">➕ Ajouter Patient</button>
+        </form>
+
+    </div>
+
+    <script>
+        function supprimer(id) {
+            fetch(`/api/patients/${id}`, { method: 'DELETE' })
+            .then(res => { if (res.ok) location.reload(); })
+            .catch(err => alert("Erreur lors de la suppression"));
+        }
+    </script>
+
 </body>
 </html>
-
-<!-- Titre de la page/formulaire -->
-<h2>Ajouter un Patient</h2>
-
-<!-- Formulaire qui envoie les données à la route POST /api/patients -->
-<form action="/api/patients" method="POST">
-    <!-- Champ pour le nom du patient -->
-    <input type="text" name="nom" placeholder="Nom" required><br>
-
-    <!-- Champ pour le prénom du patient -->
-    <input type="text" name="prenom" placeholder="Prénom" required><br>
-
-    <!-- Champ pour la date de naissance -->
-    <input type="date" name="date_naissance" placeholder="Date de naissance" required><br>
-
-    <!-- Champ pour le sexe -->
-    <input type="text" name="sexe" placeholder="Sexe" required><br>
-
-    <!-- Champ pour la date d'admission à l'hôpital -->
-    <input type="date" name="date_admission" placeholder="Date d'admission" required><br>
-
-    <!-- Champ pour le service affecté -->
-    <input type="text" name="service_affecte" placeholder="Service affecté" required><br>
-
-    <!-- Champ pour le statut du patient (ex: hospitalisé, sortie) -->
-    <input type="text" name="statut" placeholder="Statut" required><br>
-
-    <!-- Bouton pour envoyer le formulaire -->
-    <button type="submit">Ajouter Patient</button>
-</form>

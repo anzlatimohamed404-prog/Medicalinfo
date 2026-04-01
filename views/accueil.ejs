@@ -1,15 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>Accueil</title>
+    <meta charset="UTF-8">
+    <!-- Encodage UTF-8 pour supporter les accents -->
+
+    <title>Accueil - Medicalinfo</title>
+    <!-- Titre affiché dans l'onglet du navigateur -->
+
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Lien vers le fichier CSS -->
+
 </head>
 <body>
-    <h1>Bienvenue sur Medicalinfo</h1>
+
+    <!-- Barre de navigation -->
     <nav>
-        <a href="/api/patients">Patients</a> |
-        <a href="/api/medecins">Médecins</a> |
-        <a href="/api/services">Services</a> |
-        <a href="/api/rendezvous">Rendez-vous</a>
+        <a href="/api/patients">👤 Patients</a>
+        <!-- Lien vers la page des patients -->
+
+        <a href="/api/medecins">🩺 Médecins</a>
+        <!-- Lien vers la page des médecins -->
+
+        <a href="/api/services">🏥 Services</a>
+        <!-- Lien vers la page des services -->
+
+        <a href="/api/rendezvous">📅 Rendez-vous</a>
+        <!-- Lien vers la page des rendez-vous -->
     </nav>
+
+    <!-- Image de la photo en haut de la page -->
+    <div class="hero-image">
+    <!-- Conteneur de l'image principale -->
+
+        <img src="/image/hopital.jpg" alt="Hôpital Medicalinfo">
+        <!-- Affiche la photo de l'hôpital -->
+
+        <div class="hero-texte">
+        <!-- Texte superposé sur la photo -->
+
+            <h1>🏥 Medicalinfo</h1>
+            <!-- Titre principal -->
+
+            <p>Système de gestion médicale — Hôpital de Mamoudzou</p>
+            <!-- Sous-titre -->
+
+        </div>
+        <!-- Fin du texte superposé -->
+
+    </div>
+    <!-- Fin du conteneur image -->
+
+    <div class="container">
+    <!-- Conteneur principal centré -->
+
+        <div class="accueil-cards">
+        <!-- Cartes de navigation -->
+
+            <a href="/api/patients" class="card">👤 Patients</a>
+            <!-- Carte vers la page patients -->
+
+            <a href="/api/medecins" class="card">🩺 Médecins</a>
+            <!-- Carte vers la page médecins -->
+
+            <a href="/api/services" class="card">🏥 Services</a>
+            <!-- Carte vers la page services -->
+
+            <a href="/api/rendezvous" class="card">📅 Rendez-vous</a>
+            <!-- Carte vers la page rendez-vous -->
+
+        </div>
+        <!-- Fin des cartes -->
+
+    </div>
+    <!-- Fin du conteneur -->
+
 </body>
+<!-- Fin du corps de la page -->
+
 </html>
+<!-- Fin de la page HTML -->

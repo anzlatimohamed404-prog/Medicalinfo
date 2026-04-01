@@ -1,0 +1,530 @@
+/* =============================== */
+/* Police et base de la page */
+/* =============================== */
+
+* {
+    /* Applique le box-sizing à tous les éléments */
+    box-sizing: border-box;
+
+    /* Supprime les marges par défaut */
+    margin: 0;
+
+    /* Supprime les paddings par défaut */
+    padding: 0;
+}
+
+body {
+    
+    /* Police moderne et lisible */
+    font-family: 'Segoe UI', sans-serif;
+
+    /* Couleur de fond gris clair */
+    background-color: #f0f4f8;
+
+    /* Couleur du texte */
+    color: #333;
+}
+
+/* =============================== */
+/* Barre de navigation en haut */
+/* =============================== */
+
+nav {
+    /* Fond bleu médical */
+    background-color: #1a73e8;
+
+    /* Espacement intérieur */
+    padding: 15px 30px;
+
+    /* Aligne les liens en ligne */
+    display: flex;
+
+    /* Espace entre les liens */
+    gap: 20px;
+
+    /* Aligne verticalement */
+    align-items: center;
+}
+
+nav a {
+    /* Couleur blanche pour les liens */
+    color: white;
+
+    /* Supprime le soulignement */
+    text-decoration: none;
+
+    /* Taille de la police */
+    font-size: 16px;
+
+    /* Espacement intérieur */
+    padding: 8px 15px;
+
+    /* Coins arrondis */
+    border-radius: 5px;
+}
+
+nav a:hover {
+    /* Fond légèrement plus clair au survol */
+    background-color: rgba(255,255,255,0.2);
+}
+
+/* =============================== */
+/* Conteneur principal */
+/* =============================== */
+
+.container {
+    /* Largeur maximale du contenu */
+    max-width: 1000px;
+
+    /* Centre le contenu horizontalement */
+    margin: 40px auto;
+
+    /* Espacement intérieur */
+    padding: 0 20px;
+}
+
+/* =============================== */
+/* Titres */
+/* =============================== */
+
+h1 {
+    /* Taille du titre principal */
+    font-size: 32px;
+
+    /* Couleur bleue */
+    color: #1a73e8;
+
+    /* Espace en dessous */
+    margin-bottom: 20px;
+}
+
+h2 {
+    /* Taille du sous-titre */
+    font-size: 22px;
+
+    /* Couleur gris foncé */
+    color: #444;
+
+    /* Espace en dessous */
+    margin-bottom: 15px;
+
+    /* Espace en haut */
+    margin-top: 30px;
+}
+
+/* =============================== */
+/* Tableau */
+/* =============================== */
+
+table {
+    /* Prend toute la largeur disponible */
+    width: 100%;
+
+    /* Supprime les espaces entre les cellules */
+    border-collapse: collapse;
+
+    /* Fond blanc */
+    background-color: white;
+
+    /* Coins arrondis */
+    border-radius: 10px;
+
+    /* Ombre portée */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+
+    /* Cache les débordements pour les coins arrondis */
+    overflow: hidden;
+}
+
+thead {
+    /* Fond bleu pour l'en-tête du tableau */
+    background-color: #1a73e8;
+
+    /* Texte blanc */
+    color: white;
+}
+
+th, td {
+    /* Espacement intérieur des cellules */
+    padding: 12px 15px;
+
+    /* Alignement du texte à gauche */
+    text-align: left;
+
+    /* Bordure en bas de chaque cellule */
+    border-bottom: 1px solid #eee;
+}
+
+tbody tr:hover {
+    /* Fond gris clair au survol d'une ligne */
+    background-color: #f5f9ff;
+}
+
+/* =============================== */
+/* Formulaires */
+/* =============================== */
+
+form {
+    /* Fond blanc */
+    background-color: white;
+
+    /* Espacement intérieur */
+    padding: 25px;
+
+    /* Coins arrondis */
+    border-radius: 10px;
+
+    /* Ombre portée */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+
+    /* Disposition en colonne */
+    display: flex;
+
+    /* Empile les éléments verticalement */
+    flex-direction: column;
+
+    /* Espace entre chaque champ */
+    gap: 12px;
+
+    /* Largeur maximale du formulaire */
+    max-width: 500px;
+}
+
+input, select {
+    /* Espacement intérieur des champs */
+    padding: 10px 12px;
+
+    /* Bordure grise */
+    border: 1px solid #ccc;
+
+    /* Coins arrondis */
+    border-radius: 6px;
+
+    /* Taille de la police */
+    font-size: 15px;
+
+    /* Prend toute la largeur */
+    width: 100%;
+}
+
+input:focus, select:focus {
+    /* Bordure bleue quand le champ est sélectionné */
+    border-color: #1a73e8;
+
+    /* Supprime le contour par défaut */
+    outline: none;
+
+    /* Ombre bleue légère */
+    box-shadow: 0 0 0 3px rgba(26,115,232,0.15);
+}
+
+/* =============================== */
+/* Boutons */
+/* =============================== */
+
+button[type="submit"] {
+    /* Fond bleu */
+    background-color: #1a73e8;
+
+    /* Texte blanc */
+    color: white;
+
+    /* Supprime la bordure */
+    border: none;
+
+    /* Espacement intérieur */
+    padding: 11px;
+
+    /* Coins arrondis */
+    border-radius: 6px;
+
+    /* Taille de la police */
+    font-size: 15px;
+
+    /* Curseur pointeur au survol */
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    /* Fond bleu plus foncé au survol */
+    background-color: #1558b0;
+}
+
+.btn-supprimer {
+    /* Fond rouge pour le bouton supprimer */
+    background-color: #e53935;
+
+    /* Texte blanc */
+    color: white;
+
+    /* Supprime la bordure */
+    border: none;
+
+    /* Espacement intérieur */
+    padding: 6px 12px;
+
+    /* Coins arrondis */
+    border-radius: 5px;
+
+    /* Curseur pointeur */
+    cursor: pointer;
+
+    /* Taille de la police */
+    font-size: 13px;
+}
+
+.btn-supprimer:hover {
+    /* Fond rouge plus foncé au survol */
+    background-color: #b71c1c;
+}
+
+/* =============================== */
+/* Statuts colorés */
+/* =============================== */
+
+.statut-prevu {
+    /* Fond vert clair */
+    background-color: #e8f5e9;
+
+    /* Texte vert */
+    color: #2e7d32;
+
+    /* Espacement intérieur */
+    padding: 3px 10px;
+
+    /* Coins arrondis */
+    border-radius: 20px;
+
+    /* Taille de la police */
+    font-size: 13px;
+}
+
+.statut-termine {
+    /* Fond gris clair */
+    background-color: #eeeeee;
+
+    /* Texte gris */
+    color: #555;
+
+    /* Espacement intérieur */
+    padding: 3px 10px;
+
+    /* Coins arrondis */
+    border-radius: 20px;
+
+    /* Taille de la police */
+    font-size: 13px;
+}
+
+.statut-annule {
+    /* Fond rouge clair */
+    background-color: #ffebee;
+
+    /* Texte rouge */
+    color: #c62828;
+
+    /* Espacement intérieur */
+    padding: 3px 10px;
+
+    /* Coins arrondis */
+    border-radius: 20px;
+
+    /* Taille de la police */
+    font-size: 13px;
+}
+
+/* =============================== */
+/* Page accueil */
+/* =============================== */
+
+.accueil-hero {
+    /* Centrage du contenu */
+    text-align: center;
+
+    /* Espace en haut */
+    margin-top: 80px;
+}
+
+.accueil-hero h1 {
+    /* Grande taille pour le titre d'accueil */
+    font-size: 42px;
+
+    /* Couleur bleue */
+    color: #1a73e8;
+
+    /* Espace en dessous */
+    margin-bottom: 10px;
+}
+
+.accueil-hero p {
+    /* Couleur grise pour le sous-titre */
+    color: #777;
+
+    /* Taille de la police */
+    font-size: 18px;
+
+    /* Espace en dessous */
+    margin-bottom: 40px;
+}
+
+.accueil-cards {
+    /* Disposition en ligne */
+    display: flex;
+
+    /* Espace entre les cartes */
+    gap: 20px;
+
+    /* Centre les cartes */
+    justify-content: center;
+
+    /* Retour à la ligne si nécessaire */
+    flex-wrap: wrap;
+}
+
+.card {
+    /* Fond blanc */
+    background-color: white;
+
+    /* Espacement intérieur */
+    padding: 30px 40px;
+
+    /* Coins arrondis */
+    border-radius: 12px;
+
+    /* Ombre portée */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+
+    /* Supprime le soulignement */
+    text-decoration: none;
+
+    /* Couleur du texte */
+    color: #333;
+
+    /* Taille de la police */
+    font-size: 18px;
+
+    /* Gras */
+    font-weight: bold;
+
+    /* Transition au survol */
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    /* Monte légèrement au survol */
+    transform: translateY(-4px);
+
+    /* Ombre plus prononcée au survol */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+/* =============================== */
+/* Page patients */
+/* =============================== */
+
+.page-patients body {
+    /* Couleur de fond bleu très clair */
+    background-color: #eaf2ff;
+}
+
+tbody tr:nth-child(even) {
+    /* Couleur alternée sur les lignes paires */
+    background-color: #f0f7ff;
+}
+
+tbody tr:hover {
+    /* Fond bleu clair au survol */
+    background-color: #dceeff;
+}
+
+.statut-badge {
+    /* Style général des badges de statut */
+    padding: 4px 12px;
+
+    /* Coins arrondis */
+    border-radius: 20px;
+
+    /* Taille de police */
+    font-size: 12px;
+
+    /* Texte en gras */
+    font-weight: bold;
+
+    /* Fond vert clair par défaut */
+    background-color: #e8f5e9;
+
+    /* Texte vert */
+    color: #2e7d32;
+}
+
+/* =============================== */
+/* Page médecins */
+/* =============================== */
+
+.specialite-badge {
+    /* Fond violet clair */
+    background-color: #f3e5f5;
+
+    /* Texte violet */
+    color: #6a1b9a;
+
+    /* Espacement intérieur */
+    padding: 4px 12px;
+
+    /* Coins arrondis */
+    border-radius: 20px;
+
+    /* Taille de police */
+    font-size: 12px;
+
+    /* Texte en gras */
+    font-weight: bold;
+}
+
+/* =============================== */
+/* Page services */
+/* =============================== */
+
+.capacite-badge {
+    /* Fond orange clair */
+    background-color: #fff3e0;
+
+    /* Texte orange */
+    color: #e65100;
+
+    /* Espacement intérieur */
+    padding: 4px 12px;
+
+    /* Coins arrondis */
+    border-radius: 20px;
+
+    /* Taille de police */
+    font-size: 12px;
+
+    /* Texte en gras */
+    font-weight: bold;
+}
+
+/* =============================== */
+/* Page rendez-vous */
+/* =============================== */
+
+.date-badge {
+    /* Fond bleu clair */
+    background-color: #e3f2fd;
+
+    /* Texte bleu */
+    color: #1565c0;
+
+    /* Espacement intérieur */
+    padding: 4px 12px;
+
+    /* Coins arrondis */
+    border-radius: 20px;
+
+    /* Taille de police */
+    font-size: 12px;
+
+    /* Texte en gras */
+    font-weight: bold;
+}
