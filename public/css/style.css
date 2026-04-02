@@ -1,6 +1,4 @@
-/* =============================== */
-/* Police et base de la page */
-/* =============================== */
+
 
 * {
     /* Applique le box-sizing à tous les éléments */
@@ -18,12 +16,13 @@ body {
     /* Police moderne et lisible */
     font-family: 'Segoe UI', sans-serif;
 
-    /* Couleur de fond gris clair */
-    background-color: #f5ccdd;
+    /* Couleur de fond violet clair médical pour les pages sans fond image */
+    background-color: #f3e5f5;
 
     /* Couleur du texte */
     color: #333;
 }
+
 
 /* =============================== */
 /* Barre de navigation en haut */
@@ -31,7 +30,7 @@ body {
 
 nav {
     /* Fond bleu médical */
-    background-color: #ccaec0;
+    background-color: #007bff;
 
     /* Espacement intérieur */
     padding: 15px 30px;
@@ -48,13 +47,16 @@ nav {
 
 nav a {
     /* Couleur blanche pour les liens */
-    color: rgb(39, 37, 37);
+    color: white;
 
     /* Supprime le soulignement */
     text-decoration: none;
 
     /* Taille de la police */
     font-size: 16px;
+
+    /* Police en gras pour une meilleure visibilité */
+    font-weight: bold;
 
     /* Espacement intérieur */
     padding: 8px 15px;
@@ -91,8 +93,8 @@ h1 {
     /* Taille du titre principal */
     font-size: 32px;
 
-    /* Couleur bleue */
-    color: #202122;
+    /* Couleur bleue médicale */
+    color: #007bff;
 
     /* Espace en dessous */
     margin-bottom: 20px;
@@ -124,7 +126,7 @@ table {
     border-collapse: collapse;
 
     /* Fond blanc */
-    background-color: rgb(226, 206, 228);
+    background-color: white;
 
     /* Coins arrondis */
     border-radius: 10px;
@@ -138,10 +140,10 @@ table {
 
 thead {
     /* Fond bleu pour l'en-tête du tableau */
-    background-color: #f3b9f8;
+    background-color: #007bff;
 
     /* Texte blanc */
-    color: rgb(39, 36, 36);
+    color: white;
 }
 
 th, td {
@@ -156,8 +158,8 @@ th, td {
 }
 
 tbody tr:hover {
-    /* Fond gris clair au survol d'une ligne */
-    background-color: #f5f9ff;
+    /* Fond violet clair au survol d'une ligne */
+    background-color: #f3e5f5;
 }
 
 /* =============================== */
@@ -209,13 +211,13 @@ input, select {
 
 input:focus, select:focus {
     /* Bordure bleue quand le champ est sélectionné */
-    border-color: #e9bce5;
+    border-color: #007bff;
 
     /* Supprime le contour par défaut */
     outline: none;
 
     /* Ombre bleue légère */
-    box-shadow: 0 0 0 3px rgba(26,115,232,0.15);
+    box-shadow: 0 0 0 3px rgba(0,123,255,0.15);
 }
 
 /* =============================== */
@@ -223,11 +225,11 @@ input:focus, select:focus {
 /* =============================== */
 
 button[type="submit"] {
-    /* Fond bleu */
-    background-color: #1a73e8;
+    /* Fond bleu médical */
+    background-color: #692154;
 
     /* Texte blanc */
-    color: white;
+    color: rgb(236, 230, 230);
 
     /* Supprime la bordure */
     border: none;
@@ -247,12 +249,12 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
     /* Fond bleu plus foncé au survol */
-    background-color: #1558b0;
+    background-color: #0056b3;
 }
 
 .btn-supprimer {
     /* Fond rouge pour le bouton supprimer */
-    background-color: #e53935;
+    background-color: #dc3545;
 
     /* Texte blanc */
     color: white;
@@ -275,7 +277,7 @@ button[type="submit"]:hover {
 
 .btn-supprimer:hover {
     /* Fond rouge plus foncé au survol */
-    background-color: #b71c1c;
+    background-color: #c82333;
 }
 
 /* =============================== */
@@ -284,10 +286,10 @@ button[type="submit"]:hover {
 
 .statut-prevu {
     /* Fond vert clair */
-    background-color: #e8f5e9;
+    background-color: #d4edda;
 
     /* Texte vert */
-    color: #2e7d32;
+    color: #155724;
 
     /* Espacement intérieur */
     padding: 3px 10px;
@@ -300,11 +302,11 @@ button[type="submit"]:hover {
 }
 
 .statut-termine {
-    /* Fond gris clair */
-    background-color: #eeeeee;
+    /* Fond violet clair */
+    background-color: #f3e5f5;
 
     /* Texte gris */
-    color: #555;
+    color: #6c757d;
 
     /* Espacement intérieur */
     padding: 3px 10px;
@@ -318,10 +320,10 @@ button[type="submit"]:hover {
 
 .statut-annule {
     /* Fond rouge clair */
-    background-color: #ffebee;
+    background-color: #f8d7da;
 
     /* Texte rouge */
-    color: #c62828;
+    color: #721c24;
 
     /* Espacement intérieur */
     padding: 3px 10px;
@@ -349,8 +351,8 @@ button[type="submit"]:hover {
     /* Grande taille pour le titre d'accueil */
     font-size: 42px;
 
-    /* Couleur bleue */
-    color: #1a73e8;
+    /* Couleur bleue médicale */
+    color: #702666;
 
     /* Espace en dessous */
     margin-bottom: 10px;
@@ -358,7 +360,7 @@ button[type="submit"]:hover {
 
 .accueil-hero p {
     /* Couleur grise pour le sous-titre */
-    color: #777;
+    color: #6c757d;
 
     /* Taille de la police */
     font-size: 18px;
@@ -407,6 +409,9 @@ button[type="submit"]:hover {
     font-weight: bold;
 
     /* Transition au survol */
+    /* indique quelles propriétés doivent s'animer*/
+    /* anime les transformations (ex: agrandissement, déplacement) en*/
+    /* anime l'ombre de la boîte en 0.2 secondes*/
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
@@ -527,4 +532,11 @@ tbody tr:hover {
 
     /* Texte en gras */
     font-weight: bold;
+}
+
+body.accueil-bg {
+    background-image:  url('/public/image/CHM.jpg');
+    background-size:  cover;
+    background-position:  center;
+    background-repeat:  no-repeat;
 }

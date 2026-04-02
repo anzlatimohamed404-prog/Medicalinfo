@@ -1,52 +1,52 @@
-// -------------------------
-// app.js complet corrigé
-// -------------------------
 
+
+// Importation du framework Express pour construire l'application web
 const express = require('express');
-// Importe le framework Express
 
+// Importation du module mysql2 pour interagir avec la base de données MySQL
 const mysql2 = require('mysql2');
-// Importe le module mysql2
 
+// Importation du module express-myconnection pour gérer les connexions MySQL dans Express
 const myconnection = require('express-myconnection');
-// Importe express-myconnection
 
+// Création d'une instance de l'application Express
 const app = express();
-// Crée l'application Express
 
 
 // ==========================
 // MIDDLEWARES
 // ==========================
 
+// Ajout d'un middleware pour analyser les corps de requêtes JSON
 app.use(express.json());
-// Permet de lire les données JSON
 
+// Ajout d'un middleware pour analyser les corps de requêtes encodés en URL (formulaires HTML)
 app.use(express.urlencoded({ extended: true }));
-// Permet de lire les données des formulaires HTML
 
 
 // ==========================
 // CONNEXION MYSQL
 // ==========================
 
+// Définition des options de connexion à la base de données MySQL
 const optionsConnexion = {
+    // Adresse IP ou nom d'hôte du serveur MySQL
     host: "localhost",
-    // Adresse du serveur MySQL
 
+    // Nom d'utilisateur pour se connecter à MySQL
     user: "root",
-    // Nom d'utilisateur MySQL
 
+    // Mot de passe pour l'utilisateur MySQL
     password: "Irwane240319",
-    // Mot de passe MySQL
 
+    // Nom de la base de données à utiliser
     database: "medicalinfo",
-    // Nom de la base de données
 
+    // Numéro de port sur lequel MySQL écoute (par défaut 3306)
     port: 3306
-    // Port MySQL par défaut
 };
 
+// Configuration de la connexion MySQL en mode pool pour une gestion efficace des connexions
 app.use(myconnection(mysql2, optionsConnexion, "pool"));
 // Active la connexion MySQL en mode pool
 

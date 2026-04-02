@@ -25,6 +25,9 @@
     <nav>
     <!-- Barre de navigation -->
 
+        <a href="/api/accueil">🏠 Accueil</a>
+        <!-- Lien vers la page d'accueil -->
+
         <a href="/api/patients">👤 Patients</a>
         <!-- Lien vers la page des patients -->
 
@@ -100,14 +103,14 @@
                         <td><%= patient.prenom %></td>
                         <!-- Affiche le prénom du patient -->
 
-                        <td><%= patient.date_naissance %></td>
-                        <!-- Affiche la date de naissance du patient -->
+                        <td><%= new Date(patient.date_naissance).toLocaleDateString('fr-FR') %></td>
+                        <!-- Affiche la date de naissance du patient au format français -->
 
                         <td><%= patient.sexe %></td>
                         <!-- Affiche le sexe du patient -->
 
-                        <td><%= patient.date_admission %></td>
-                        <!-- Affiche la date d'admission du patient -->
+                        <td><%= new Date(patient.date_admission).toLocaleDateString('fr-FR') %></td>
+                        <!-- Affiche la date d'admission du patient au format français -->
 
                         <td><%= patient.service_affecte %></td>
                         <!-- Affiche le service affecté au patient -->

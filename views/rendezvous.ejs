@@ -1,29 +1,32 @@
+<!-- Déclare que ce document est un document HTML5 conforme aux standards du web -->
 <!DOCTYPE html>
-<!-- Déclaration du type de document HTML5 -->
 
+<!-- Ouvre la balise racine HTML avec l'attribut lang="fr" pour indiquer que le contenu est en français, améliorant l'accessibilité et le SEO -->
 <html lang="fr">
-<!-- Balise principale, langue française -->
 
+<!-- Ouvre la section head du document HTML, qui contient les métadonnées invisibles pour le navigateur -->
 <head>
-<!-- En-tête du document -->
 
+    <!-- Définit l'encodage des caractères de la page comme UTF-8, permettant d'afficher correctement les caractères accentués et spéciaux -->
     <meta charset="UTF-8">
-    <!-- Encodage des caractères en UTF-8 -->
 
+    <!-- Définit le titre de la page web, affiché dans l'onglet du navigateur et utilisé pour le référencement -->
     <title>Rendez-vous - Medicalinfo</title>
-    <!-- Titre affiché dans l'onglet du navigateur -->
 
+    <!-- Lie une feuille de style CSS externe située dans le dossier public/css, pour appliquer des styles visuels à la page -->
     <link rel="stylesheet" href="/css/style.css">
-    <!-- Lien vers le fichier de style CSS -->
 
+<!-- Ferme la section head du document -->
 </head>
-<!-- Fin de l'en-tête -->
 
 <body>
 <!-- Corps de la page -->
 
     <nav>
     <!-- Barre de navigation -->
+
+        <a href="/api/accueil">🏠 Accueil</a>
+        <!-- Lien vers la page d'accueil -->
 
         <a href="/api/patients">👤 Patients</a>
         <!-- Lien vers la page des patients -->
@@ -45,6 +48,10 @@
 
         <h1>📅 Rendez-vous</h1>
         <!-- Titre principal de la page -->
+
+        <div id="clock" style="font-size: 24px; font-weight: bold; color: #7e57c2; text-align: center; margin-bottom: 20px;">
+        <!-- Horloge affichant l'heure actuelle en violet doux -->
+        </div>
 
         <table>
         <!-- Tableau d'affichage des rendez-vous -->
@@ -306,7 +313,7 @@
     <!-- Fin des styles -->
 
     <script>
-    /* Script JavaScript pour la suppression */
+    /* Script JavaScript pour la suppression et l'horloge */
 
         function supprimerRdv(id) {
         /* Fonction appelée au clic sur le bouton supprimer */
@@ -324,6 +331,25 @@
             .catch(err => alert("Erreur lors de la suppression"));
             /* Affiche une alerte en cas d'erreur réseau */
         }
+
+        function updateClock() {
+        /* Fonction pour mettre à jour l'horloge */
+
+            const now = new Date();
+            /* Obtient la date et l'heure actuelles */
+
+            const timeString = now.toLocaleTimeString('fr-FR');
+            /* Formate l'heure au format français */
+
+            document.getElementById('clock').textContent = 'Heure actuelle : ' + timeString;
+            /* Affiche l'heure dans le div clock */
+        }
+
+        setInterval(updateClock, 1000);
+        /* Met à jour l'horloge toutes les secondes */
+
+        updateClock();
+        /* Met à jour immédiatement au chargement de la page */
 
     </script>
     <!-- Fin du script -->
