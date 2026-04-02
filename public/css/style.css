@@ -15,12 +15,15 @@ body {
     
     /* Police moderne et lisible */
     font-family: 'Segoe UI', sans-serif;
+    background-image:  url(/image/CHM.jpg);
+
 
     /* Couleur de fond violet clair médical pour les pages sans fond image */
     background-color: #f3e5f5;
 
     /* Couleur du texte */
     color: #333;
+
 }
 
 
@@ -347,20 +350,26 @@ button[type="submit"]:hover {
     margin-top: 80px;
 }
 
-.accueil-hero h1 {
+.hero-texte h1 {
     /* Grande taille pour le titre d'accueil */
     font-size: 42px;
 
-    /* Couleur bleue médicale */
-    color: #702666;
+    /* Couleur blanche pour contraste sur l'image */
+    color: white;
+
+    /* Ombre pour améliorer la lisibilité */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
 
     /* Espace en dessous */
     margin-bottom: 10px;
 }
 
-.accueil-hero p {
-    /* Couleur grise pour le sous-titre */
-    color: #6c757d;
+.hero-texte p {
+    /* Couleur blanche pour contraste */
+    color: white;
+
+    /* Ombre pour lisibilité */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
 
     /* Taille de la police */
     font-size: 18px;
@@ -534,8 +543,8 @@ tbody tr:hover {
     font-weight: bold;
 }
 
-body.accueil-bg {
-    background-image:  url('/public/image/CHM.jpg');
+.accueil-bg {
+    background-image:  url(/image/font-accueil.jpg.jpg);
     background-size:  cover;
     background-position:  center;
     background-repeat:  no-repeat;
