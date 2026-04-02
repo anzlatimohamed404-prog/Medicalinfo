@@ -1,84 +1,308 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Patients - Medicalinfo</title>
-    <!-- Lien vers le fichier CSS -->
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
+<!-- Déclaration du type de document HTML5 -->
 
-    <!-- Barre de navigation -->
+<html lang="fr">
+<!-- Balise principale, langue française -->
+
+<head>
+<!-- En-tête du document -->
+
+    <meta charset="UTF-8">
+    <!-- Encodage des caractères en UTF-8 -->
+
+    <title>Patients - Medicalinfo</title>
+    <!-- Titre affiché dans l'onglet du navigateur -->
+
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Lien vers le fichier de style CSS -->
+
+</head>
+<!-- Fin de l'en-tête -->
+
+<body>
+<!-- Corps de la page -->
+
     <nav>
+    <!-- Barre de navigation -->
+
         <a href="/api/patients">👤 Patients</a>
+        <!-- Lien vers la page des patients -->
+
         <a href="/api/medecins">🩺 Médecins</a>
+        <!-- Lien vers la page des médecins -->
+
         <a href="/api/services">🏥 Services</a>
+        <!-- Lien vers la page des services -->
+
         <a href="/api/rendezvous">📅 Rendez-vous</a>
+        <!-- Lien vers la page des rendez-vous -->
+
     </nav>
+    <!-- Fin de la barre de navigation -->
 
     <div class="container">
+    <!-- Conteneur principal centré -->
 
         <h1>👤 Patients</h1>
+        <!-- Titre principal de la page -->
 
-        <!-- Tableau des patients -->
         <table>
+        <!-- Tableau d'affichage des patients -->
+
             <thead>
+            <!-- En-tête du tableau -->
+
                 <tr>
+                <!-- Ligne d'en-tête -->
+
                     <th>Nom</th>
+                    <!-- Colonne nom du patient -->
+
                     <th>Prénom</th>
+                    <!-- Colonne prénom du patient -->
+
                     <th>Date de naissance</th>
+                    <!-- Colonne date de naissance -->
+
                     <th>Sexe</th>
+                    <!-- Colonne sexe du patient -->
+
                     <th>Admission</th>
+                    <!-- Colonne date d'admission -->
+
                     <th>Service</th>
+                    <!-- Colonne service affecté -->
+
                     <th>Statut</th>
+                    <!-- Colonne statut du patient -->
+
                     <th>Action</th>
+                    <!-- Colonne boutons d'action -->
+
                 </tr>
+                <!-- Fin de la ligne d'en-tête -->
+
             </thead>
+            <!-- Fin de l'en-tête du tableau -->
+
             <tbody>
+            <!-- Corps du tableau avec les données -->
+
                 <% resultatPatients.forEach(patient => { %>
-                <tr>
-                    <td><%= patient.nom %></td>
-                    <td><%= patient.prenom %></td>
-                    <td><%= patient.date_naissance %></td>
-                    <td><%= patient.sexe %></td>
-                    <td><%= patient.date_admission %></td>
-                    <td><%= patient.service_affecte %></td>
-                    <td><%= patient.statut %></td>
-                    <td>
-                        <button class="btn-supprimer" onclick="supprimer(<%= patient.id_patient %>)">🗑️ Supprimer</button>
-                    </td>
-                </tr>
+                <!-- Boucle sur chaque patient de la liste -->
+
+                    <tr>
+                    <!-- Ligne pour un patient -->
+
+                        <td><%= patient.nom %></td>
+                        <!-- Affiche le nom du patient -->
+
+                        <td><%= patient.prenom %></td>
+                        <!-- Affiche le prénom du patient -->
+
+                        <td><%= patient.date_naissance %></td>
+                        <!-- Affiche la date de naissance du patient -->
+
+                        <td><%= patient.sexe %></td>
+                        <!-- Affiche le sexe du patient -->
+
+                        <td><%= patient.date_admission %></td>
+                        <!-- Affiche la date d'admission du patient -->
+
+                        <td><%= patient.service_affecte %></td>
+                        <!-- Affiche le service affecté au patient -->
+
+                        <td><%= patient.statut %></td>
+                        <!-- Affiche le statut du patient -->
+
+                        <td>
+                        <!-- Cellule des actions -->
+
+                            <button class="btn-supprimer" onclick="supprimer(<%= patient.id_patient %>)">🗑️ Supprimer</button>
+                            <!-- Bouton pour supprimer le patient -->
+
+                        </td>
+                        <!-- Fin de la cellule actions -->
+
+                    </tr>
+                    <!-- Fin de la ligne du patient -->
+
                 <% }) %>
+                <!-- Fin de la boucle forEach -->
+
             </tbody>
+            <!-- Fin du corps du tableau -->
+
         </table>
+        <!-- Fin du tableau -->
 
         <h2>Ajouter un Patient</h2>
+        <!-- Titre du formulaire d'ajout -->
 
-        <!-- Formulaire d'ajout -->
         <form action="/api/patients" method="POST">
-            <input type="text" name="nom" placeholder="Nom" required>
-            <input type="text" name="prenom" placeholder="Prénom" required>
-            <input type="date" name="date_naissance" required>
-            <select name="sexe" required>
-                <option value="">-- Sexe --</option>
-                <option value="H">Homme</option>
-                <option value="F">Femme</option>
-            </select>
-            <input type="date" name="date_admission" required>
-            <input type="text" name="service_affecte" placeholder="Service affecté" required>
-            <input type="text" name="statut" placeholder="Statut" required>
+        <!-- Formulaire qui envoie les données en POST vers l'API -->
+
+            <div class="form-group">
+            <!-- Groupe champ + label pour le nom -->
+
+                <label for="nom">Nom</label>
+                <!-- Label visible au-dessus du champ nom -->
+
+                <input type="text" id="nom" name="nom" placeholder="Nom" required>
+                <!-- Champ texte pour saisir le nom du patient -->
+
+            </div>
+            <!-- Fin du groupe nom -->
+
+            <div class="form-group">
+            <!-- Groupe champ + label pour le prénom -->
+
+                <label for="prenom">Prénom</label>
+                <!-- Label visible au-dessus du champ prénom -->
+
+                <input type="text" id="prenom" name="prenom" placeholder="Prénom" required>
+                <!-- Champ texte pour saisir le prénom du patient -->
+
+            </div>
+            <!-- Fin du groupe prénom -->
+
+            <div class="form-group">
+            <!-- Groupe champ + label pour la date de naissance -->
+
+                <label for="date_naissance">Date de naissance</label>
+                <!-- Label visible au-dessus du champ date de naissance -->
+
+                <input type="date" id="date_naissance" name="date_naissance" required>
+                <!-- Champ date pour saisir la date de naissance -->
+
+            </div>
+            <!-- Fin du groupe date de naissance -->
+
+            <div class="form-group">
+            <!-- Groupe champ + label pour le sexe -->
+
+                <label for="sexe">Sexe</label>
+                <!-- Label visible au-dessus du menu déroulant sexe -->
+
+                <select id="sexe" name="sexe" required>
+                <!-- Menu déroulant pour choisir le sexe -->
+
+                    <option value="">-- Sexe --</option>
+                    <!-- Option par défaut non sélectionnable -->
+
+                    <option value="H">Homme</option>
+                    <!-- Option homme -->
+
+                    <option value="F">Femme</option>
+                    <!-- Option femme -->
+
+                </select>
+                <!-- Fin du menu déroulant sexe -->
+
+            </div>
+            <!-- Fin du groupe sexe -->
+
+            <div class="form-group">
+            <!-- Groupe champ + label pour la date d'admission -->
+
+                <label for="date_admission">Date d'admission</label>
+                <!-- Label visible au-dessus du champ date d'admission -->
+
+                <input type="date" id="date_admission" name="date_admission" required>
+                <!-- Champ date pour saisir la date d'admission -->
+
+            </div>
+            <!-- Fin du groupe date d'admission -->
+
+            <div class="form-group">
+            <!-- Groupe champ + label pour le service affecté -->
+
+                <label for="service_affecte">Service affecté</label>
+                <!-- Label visible au-dessus du champ service -->
+
+                <input type="text" id="service_affecte" name="service_affecte" placeholder="Service affecté" required>
+                <!-- Champ texte pour saisir le service affecté -->
+
+            </div>
+            <!-- Fin du groupe service -->
+
+            <div class="form-group">
+            <!-- Groupe champ + label pour le statut -->
+
+                <label for="statut">Statut</label>
+                <!-- Label visible au-dessus du champ statut -->
+
+                <input type="text" id="statut" name="statut" placeholder="Statut" required>
+                <!-- Champ texte pour saisir le statut du patient -->
+
+            </div>
+            <!-- Fin du groupe statut -->
+
             <button type="submit">➕ Ajouter Patient</button>
+            <!-- Bouton pour soumettre le formulaire -->
+
         </form>
+        <!-- Fin du formulaire -->
 
     </div>
+    <!-- Fin du conteneur principal -->
+
+    <style>
+    /* Styles pour les groupes du formulaire */
+
+        .form-group {
+            display: flex;
+            /* Affichage flexible pour empiler label et input */
+
+            flex-direction: column;
+            /* Label au-dessus, input en dessous */
+
+            margin-bottom: 10px;
+            /* Espace entre chaque groupe de champ */
+        }
+
+        .form-group label {
+            font-size: 12px;
+            /* Taille du texte du label */
+
+            color: #666;
+            /* Couleur grise pour le label */
+
+            margin-bottom: 4px;
+            /* Espace entre le label et l'input */
+
+            font-weight: 500;
+            /* Texte légèrement gras */
+        }
+
+    </style>
+    <!-- Fin des styles -->
 
     <script>
+    /* Script JavaScript pour la suppression */
+
         function supprimer(id) {
+        /* Fonction appelée au clic sur le bouton supprimer */
+
             fetch(`/api/patients/${id}`, { method: 'DELETE' })
-            .then(res => { if (res.ok) location.reload(); })
+            /* Envoie une requête DELETE à l'API avec l'id du patient */
+
+            .then(res => {
+            /* Quand le serveur répond */
+
+                if (res.ok) location.reload();
+                /* Si la suppression a réussi, recharge la page */
+
+            })
             .catch(err => alert("Erreur lors de la suppression"));
+            /* Affiche une alerte en cas d'erreur réseau */
         }
+
     </script>
+    <!-- Fin du script -->
 
 </body>
+<!-- Fin du corps de la page -->
+
 </html>
+<!-- Fin du document HTML -->

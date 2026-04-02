@@ -19,7 +19,7 @@ body {
     font-family: 'Segoe UI', sans-serif;
 
     /* Couleur de fond gris clair */
-    background-color: #f0f4f8;
+    background-color: #f5ccdd;
 
     /* Couleur du texte */
     color: #333;
@@ -31,7 +31,7 @@ body {
 
 nav {
     /* Fond bleu médical */
-    background-color: #1a73e8;
+    background-color: #ccaec0;
 
     /* Espacement intérieur */
     padding: 15px 30px;
@@ -48,7 +48,7 @@ nav {
 
 nav a {
     /* Couleur blanche pour les liens */
-    color: white;
+    color: rgb(39, 37, 37);
 
     /* Supprime le soulignement */
     text-decoration: none;
@@ -92,7 +92,7 @@ h1 {
     font-size: 32px;
 
     /* Couleur bleue */
-    color: #1a73e8;
+    color: #202122;
 
     /* Espace en dessous */
     margin-bottom: 20px;
@@ -124,7 +124,7 @@ table {
     border-collapse: collapse;
 
     /* Fond blanc */
-    background-color: white;
+    background-color: rgb(226, 206, 228);
 
     /* Coins arrondis */
     border-radius: 10px;
@@ -138,10 +138,10 @@ table {
 
 thead {
     /* Fond bleu pour l'en-tête du tableau */
-    background-color: #1a73e8;
+    background-color: #f3b9f8;
 
     /* Texte blanc */
-    color: white;
+    color: rgb(39, 36, 36);
 }
 
 th, td {
@@ -209,7 +209,7 @@ input, select {
 
 input:focus, select:focus {
     /* Bordure bleue quand le champ est sélectionné */
-    border-color: #1a73e8;
+    border-color: #e9bce5;
 
     /* Supprime le contour par défaut */
     outline: none;

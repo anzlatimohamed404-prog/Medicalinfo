@@ -1,71 +1,242 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Médecins - Medicalinfo</title>
-    <!-- Lien vers le fichier CSS -->
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
+<!-- Déclaration du type de document HTML5 -->
 
-    <!-- Barre de navigation -->
+<html lang="fr">
+<!-- Balise principale, langue française -->
+
+<head>
+<!-- En-tête du document -->
+
+    <meta charset="UTF-8">
+    <!-- Encodage des caractères en UTF-8 -->
+
+    <title>Médecins - Medicalinfo</title>
+    <!-- Titre affiché dans l'onglet du navigateur -->
+
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Lien vers le fichier de style CSS -->
+
+</head>
+<!-- Fin de l'en-tête -->
+
+<body>
+<!-- Corps de la page -->
+
     <nav>
+    <!-- Barre de navigation -->
+
         <a href="/api/patients">👤 Patients</a>
+        <!-- Lien vers la page des patients -->
+
         <a href="/api/medecins">🩺 Médecins</a>
+        <!-- Lien vers la page des médecins -->
+
         <a href="/api/services">🏥 Services</a>
+        <!-- Lien vers la page des services -->
+
         <a href="/api/rendezvous">📅 Rendez-vous</a>
+        <!-- Lien vers la page des rendez-vous -->
+
     </nav>
+    <!-- Fin de la barre de navigation -->
 
     <div class="container">
+    <!-- Conteneur principal centré -->
 
         <h1>🩺 Médecins</h1>
+        <!-- Titre principal de la page -->
 
-        <!-- Tableau des médecins -->
         <table>
+        <!-- Tableau d'affichage des médecins -->
+
             <thead>
+            <!-- En-tête du tableau -->
+
                 <tr>
+                <!-- Ligne d'en-tête -->
+
                     <th>Nom</th>
+                    <!-- Colonne nom du médecin -->
+
                     <th>Prénom</th>
+                    <!-- Colonne prénom du médecin -->
+
                     <th>Spécialité</th>
+                    <!-- Colonne spécialité du médecin -->
+
                     <th>Service</th>
+                    <!-- Colonne service affecté -->
+
                     <th>Action</th>
+                    <!-- Colonne boutons d'action -->
+
                 </tr>
+                <!-- Fin de la ligne d'en-tête -->
+
             </thead>
+            <!-- Fin de l'en-tête du tableau -->
+
             <tbody>
+            <!-- Corps du tableau avec les données -->
+
                 <% resultatMedecins.forEach(medecin => { %>
-                <tr>
-                    <td><%= medecin.nom %></td>
-                    <td><%= medecin.prenom %></td>
-                    <td><%= medecin.specialite %></td>
-                    <td><%= medecin.service_affecte %></td>
-                    <td>
-                        <button class="btn-supprimer" onclick="supprimer(<%= medecin.id_medecin %>)">🗑️ Supprimer</button>
-                    </td>
-                </tr>
+                <!-- Boucle sur chaque médecin de la liste -->
+
+                    <tr>
+                    <!-- Ligne pour un médecin -->
+
+                        <td><%= medecin.nom %></td>
+                        <!-- Affiche le nom du médecin -->
+
+                        <td><%= medecin.prenom %></td>
+                        <!-- Affiche le prénom du médecin -->
+
+                        <td><%= medecin.specialite %></td>
+                        <!-- Affiche la spécialité du médecin -->
+
+                        <td><%= medecin.service_affecte %></td>
+                        <!-- Affiche le service affecté au médecin -->
+
+                        <td>
+                        <!-- Cellule des actions -->
+
+                            <button class="btn-supprimer" onclick="supprimer(<%= medecin.id_medecin %>)">🗑️ Supprimer</button>
+                            <!-- Bouton pour supprimer le médecin -->
+
+                        </td>
+                        <!-- Fin de la cellule actions -->
+
+                    </tr>
+                    <!-- Fin de la ligne du médecin -->
+
                 <% }) %>
+                <!-- Fin de la boucle forEach -->
+
             </tbody>
+            <!-- Fin du corps du tableau -->
+
         </table>
+        <!-- Fin du tableau -->
 
         <h2>Ajouter un Médecin</h2>
+        <!-- Titre du formulaire d'ajout -->
 
-        <!-- Formulaire d'ajout -->
         <form action="/api/medecins" method="POST">
-            <input type="text" name="nom" placeholder="Nom" required>
-            <input type="text" name="prenom" placeholder="Prénom" required>
-            <input type="text" name="specialite" placeholder="Spécialité" required>
-            <input type="text" name="service_affecte" placeholder="Service affecté" required>
+        <!-- Formulaire qui envoie les données en POST vers l'API -->
+
+            <div class="form-group">
+            <!-- Groupe champ + label pour le nom -->
+
+                <label for="nom">Nom</label>
+                <!-- Label visible au-dessus du champ nom -->
+
+                <input type="text" id="nom" name="nom" placeholder="Nom" required>
+                <!-- Champ texte pour saisir le nom du médecin -->
+
+            </div>
+            <!-- Fin du groupe nom -->
+
+            <div class="form-group">
+            <!-- Groupe champ + label pour le prénom -->
+
+                <label for="prenom">Prénom</label>
+                <!-- Label visible au-dessus du champ prénom -->
+
+                <input type="text" id="prenom" name="prenom" placeholder="Prénom" required>
+                <!-- Champ texte pour saisir le prénom du médecin -->
+
+            </div>
+            <!-- Fin du groupe prénom -->
+
+            <div class="form-group">
+            <!-- Groupe champ + label pour la spécialité -->
+
+                <label for="specialite">Spécialité</label>
+                <!-- Label visible au-dessus du champ spécialité -->
+
+                <input type="text" id="specialite" name="specialite" placeholder="Spécialité" required>
+                <!-- Champ texte pour saisir la spécialité du médecin -->
+
+            </div>
+            <!-- Fin du groupe spécialité -->
+
+            <div class="form-group">
+            <!-- Groupe champ + label pour le service affecté -->
+
+                <label for="service_affecte">Service affecté</label>
+                <!-- Label visible au-dessus du champ service -->
+
+                <input type="text" id="service_affecte" name="service_affecte" placeholder="Service affecté" required>
+                <!-- Champ texte pour saisir le service affecté au médecin -->
+
+            </div>
+            <!-- Fin du groupe service -->
+
             <button type="submit">➕ Ajouter Médecin</button>
+            <!-- Bouton pour soumettre le formulaire -->
+
         </form>
+        <!-- Fin du formulaire -->
 
     </div>
+    <!-- Fin du conteneur principal -->
+
+    <style>
+    /* Styles pour les groupes du formulaire */
+
+        .form-group {
+            display: flex;
+            /* Affichage flexible pour empiler label et input */
+
+            flex-direction: column;
+            /* Label au-dessus, input en dessous */
+
+            margin-bottom: 10px;
+            /* Espace entre chaque groupe de champ */
+        }
+
+        .form-group label {
+            font-size: 12px;
+            /* Taille du texte du label */
+
+            color: #666;
+            /* Couleur grise pour le label */
+
+            margin-bottom: 4px;
+            /* Espace entre le label et l'input */
+
+            font-weight: 500;
+            /* Texte légèrement gras */
+        }
+
+    </style>
+    <!-- Fin des styles -->
 
     <script>
+    /* Script JavaScript pour la suppression */
+
         function supprimer(id) {
+        /* Fonction appelée au clic sur le bouton supprimer */
+
             fetch(`/api/medecins/${id}`, { method: 'DELETE' })
-            .then(res => { if (res.ok) location.reload(); })
+            /* Envoie une requête DELETE à l'API avec l'id du médecin */
+
+            .then(res => {
+            /* Quand le serveur répond */
+
+                if (res.ok) location.reload();
+                /* Si la suppression a réussi, recharge la page */
+
+            })
             .catch(err => alert("Erreur lors de la suppression"));
+            /* Affiche une alerte en cas d'erreur réseau */
         }
+
     </script>
+    <!-- Fin du script -->
 
 </body>
+<!-- Fin du corps de la page -->
+
 </html>
+<!-- Fin du document HTML -->

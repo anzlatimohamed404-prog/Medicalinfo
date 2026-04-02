@@ -1,155 +1,254 @@
 <!DOCTYPE html>
+<!-- Déclaration du type de document HTML5 -->
+
 <html lang="fr">
+<!-- Balise principale, langue française -->
+
 <head>
+<!-- En-tête du document -->
+
     <meta charset="UTF-8">
-    <!-- Encodage UTF-8 -->
+    <!-- Encodage des caractères en UTF-8 -->
 
     <title>Services - Medicalinfo</title>
-    <!-- Titre de l'onglet -->
+    <!-- Titre affiché dans l'onglet du navigateur -->
 
     <link rel="stylesheet" href="/css/style.css">
-    <!-- Lien vers le fichier CSS -->
+    <!-- Lien vers le fichier de style CSS -->
 
 </head>
-<body>
+<!-- Fin de l'en-tête -->
 
-    <!-- Barre de navigation -->
+<body>
+<!-- Corps de la page -->
+
     <nav>
+    <!-- Barre de navigation -->
+
         <a href="/api/patients">👤 Patients</a>
-        <!-- Lien patients -->
+        <!-- Lien vers la page des patients -->
 
         <a href="/api/medecins">🩺 Médecins</a>
-        <!-- Lien médecins -->
+        <!-- Lien vers la page des médecins -->
 
         <a href="/api/services">🏥 Services</a>
-        <!-- Lien services -->
+        <!-- Lien vers la page des services -->
 
         <a href="/api/rendezvous">📅 Rendez-vous</a>
-        <!-- Lien rendez-vous -->
+        <!-- Lien vers la page des rendez-vous -->
+
     </nav>
+    <!-- Fin de la barre de navigation -->
 
     <div class="container">
-    <!-- Conteneur principal -->
+    <!-- Conteneur principal centré -->
 
         <h1>🏥 Services</h1>
-        <!-- Titre de la page -->
+        <!-- Titre principal de la page -->
 
         <table>
-        <!-- Tableau des services -->
+        <!-- Tableau d'affichage des services -->
 
             <thead>
             <!-- En-tête du tableau -->
 
                 <tr>
+                <!-- Ligne d'en-tête -->
+
                     <th>Nom du service</th>
                     <!-- Colonne nom du service -->
 
                     <th>Responsable</th>
-                    <!-- Colonne responsable -->
+                    <!-- Colonne responsable du service -->
 
                     <th>Capacité</th>
-                    <!-- Colonne capacité -->
+                    <!-- Colonne capacité en lits -->
 
                     <th>Action</th>
-                    <!-- Colonne action -->
+                    <!-- Colonne boutons d'action -->
+
                 </tr>
+                <!-- Fin de la ligne d'en-tête -->
+
             </thead>
+            <!-- Fin de l'en-tête du tableau -->
 
             <tbody>
-            <!-- Corps du tableau -->
+            <!-- Corps du tableau avec les données -->
 
                 <% if (resultatServices && resultatServices.length > 0) { %>
-                <!-- Vérifie si des services existent -->
+                <!-- Vérifie si la liste des services n'est pas vide -->
 
                     <% resultatServices.forEach(service => { %>
-                    <!-- Parcourt chaque service -->
+                    <!-- Boucle sur chaque service de la liste -->
 
                         <tr>
+                        <!-- Ligne pour un service -->
 
                             <td><%= service.nom_service %></td>
                             <!-- Affiche le nom du service -->
 
                             <td><%= service.responsable %></td>
-                            <!-- Affiche le responsable -->
+                            <!-- Affiche le responsable du service -->
 
                             <td>
+                            <!-- Cellule de la capacité -->
+
                                 <span class="capacite-badge"><%= service.capacite %> lits</span>
-                                <!-- Badge orange pour la capacité -->
+                                <!-- Affiche la capacité avec un badge orange -->
+
                             </td>
+                            <!-- Fin de la cellule capacité -->
 
                             <td>
+                            <!-- Cellule des actions -->
+
                                 <button class="btn-supprimer" onclick="supprimer(<%= service.id_service %>)">🗑️ Supprimer</button>
-                                <!-- Bouton supprimer -->
+                                <!-- Bouton pour supprimer le service -->
+
                             </td>
+                            <!-- Fin de la cellule actions -->
 
                         </tr>
-                        <!-- Fin de la ligne -->
+                        <!-- Fin de la ligne du service -->
 
                     <% }) %>
-                    <!-- Fin de la boucle -->
+                    <!-- Fin de la boucle forEach -->
 
                 <% } else { %>
-                <!-- Si aucun service -->
+                <!-- Si aucun service n'existe -->
 
                     <tr>
+                    <!-- Ligne de message vide -->
+
                         <td colspan="4" style="text-align:center; color:#999;">
+                        <!-- Cellule fusionnée sur 4 colonnes -->
+
                             Aucun service pour le moment
+                            <!-- Message affiché quand la liste est vide -->
+
                         </td>
-                        <!-- Message si liste vide -->
+                        <!-- Fin de la cellule -->
+
                     </tr>
+                    <!-- Fin de la ligne vide -->
 
                 <% } %>
                 <!-- Fin du if/else -->
 
             </tbody>
+            <!-- Fin du corps du tableau -->
 
         </table>
         <!-- Fin du tableau -->
 
         <h2>Ajouter un Service</h2>
-        <!-- Titre du formulaire -->
+        <!-- Titre du formulaire d'ajout -->
 
         <form action="/api/services" method="POST">
-        <!-- Formulaire d'ajout -->
+        <!-- Formulaire qui envoie les données en POST vers l'API -->
 
-            <input type="text" name="nom_service" placeholder="Nom du service" required>
-            <!-- Champ nom du service -->
+            <div class="form-group">
+            <!-- Groupe champ + label pour le nom du service -->
 
-            <input type="text" name="responsable" placeholder="Responsable" required>
-            <!-- Champ responsable -->
+                <label for="nom_service">Nom du service</label>
+                <!-- Label visible au-dessus du champ nom du service -->
 
-            <input type="number" name="capacite" placeholder="Capacité" required>
-            <!-- Champ capacité -->
+                <input type="text" id="nom_service" name="nom_service" placeholder="Nom du service" required>
+                <!-- Champ texte pour saisir le nom du service -->
+
+            </div>
+            <!-- Fin du groupe nom du service -->
+
+            <div class="form-group">
+            <!-- Groupe champ + label pour le responsable -->
+
+                <label for="responsable">Responsable</label>
+                <!-- Label visible au-dessus du champ responsable -->
+
+                <input type="text" id="responsable" name="responsable" placeholder="Responsable" required>
+                <!-- Champ texte pour saisir le nom du responsable -->
+
+            </div>
+            <!-- Fin du groupe responsable -->
+
+            <div class="form-group">
+            <!-- Groupe champ + label pour la capacité -->
+
+                <label for="capacite">Capacité</label>
+                <!-- Label visible au-dessus du champ capacité -->
+
+                <input type="number" id="capacite" name="capacite" placeholder="Capacité" required>
+                <!-- Champ numérique pour saisir la capacité en lits -->
+
+            </div>
+            <!-- Fin du groupe capacité -->
 
             <button type="submit">➕ Ajouter Service</button>
-            <!-- Bouton d'envoi -->
+            <!-- Bouton pour soumettre le formulaire -->
 
         </form>
         <!-- Fin du formulaire -->
 
     </div>
-    <!-- Fin du conteneur -->
+    <!-- Fin du conteneur principal -->
+
+    <style>
+    /* Styles pour les groupes du formulaire */
+
+        .form-group {
+            display: flex;
+            /* Affichage flexible pour empiler label et input */
+
+            flex-direction: column;
+            /* Label au-dessus, input en dessous */
+
+            margin-bottom: 10px;
+            /* Espace entre chaque groupe de champ */
+        }
+
+        .form-group label {
+            font-size: 12px;
+            /* Taille du texte du label */
+
+            color: #666;
+            /* Couleur grise pour le label */
+
+            margin-bottom: 4px;
+            /* Espace entre le label et l'input */
+
+            font-weight: 500;
+            /* Texte légèrement gras */
+        }
+
+    </style>
+    <!-- Fin des styles -->
 
     <script>
+    /* Script JavaScript pour la suppression */
 
         function supprimer(id) {
-        // Fonction de suppression d'un service
+        /* Fonction appelée au clic sur le bouton supprimer */
 
             fetch(`/api/services/${id}`, { method: 'DELETE' })
-            // Envoie la requête DELETE avec l'id
+            /* Envoie une requête DELETE à l'API avec l'id du service */
 
             .then(res => {
-            // Quand le serveur répond
+            /* Quand le serveur répond */
 
                 if (res.ok) location.reload();
-                // Recharge la page si succès
+                /* Si la suppression a réussi, recharge la page */
+
             })
             .catch(err => alert("Erreur lors de la suppression"));
-            // Affiche une erreur si problème
+            /* Affiche une alerte en cas d'erreur réseau */
         }
 
     </script>
     <!-- Fin du script -->
 
 </body>
+<!-- Fin du corps de la page -->
+
 </html>
+<!-- Fin du document HTML -->

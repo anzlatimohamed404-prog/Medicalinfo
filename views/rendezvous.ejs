@@ -1,208 +1,335 @@
 <!DOCTYPE html>
+<!-- Déclaration du type de document HTML5 -->
+
 <html lang="fr">
+<!-- Balise principale, langue française -->
+
 <head>
+<!-- En-tête du document -->
+
     <meta charset="UTF-8">
-    <!-- Encodage UTF-8 -->
+    <!-- Encodage des caractères en UTF-8 -->
 
     <title>Rendez-vous - Medicalinfo</title>
-    <!-- Titre de l'onglet -->
+    <!-- Titre affiché dans l'onglet du navigateur -->
 
     <link rel="stylesheet" href="/css/style.css">
-    <!-- Lien vers le fichier CSS -->
+    <!-- Lien vers le fichier de style CSS -->
 
 </head>
-<body>
+<!-- Fin de l'en-tête -->
 
-    <!-- Barre de navigation -->
+<body>
+<!-- Corps de la page -->
+
     <nav>
+    <!-- Barre de navigation -->
+
         <a href="/api/patients">👤 Patients</a>
-        <!-- Lien patients -->
+        <!-- Lien vers la page des patients -->
 
         <a href="/api/medecins">🩺 Médecins</a>
-        <!-- Lien médecins -->
+        <!-- Lien vers la page des médecins -->
 
         <a href="/api/services">🏥 Services</a>
-        <!-- Lien services -->
+        <!-- Lien vers la page des services -->
 
         <a href="/api/rendezvous">📅 Rendez-vous</a>
-        <!-- Lien rendez-vous -->
+        <!-- Lien vers la page des rendez-vous -->
+
     </nav>
+    <!-- Fin de la barre de navigation -->
 
     <div class="container">
-    <!-- Conteneur principal -->
+    <!-- Conteneur principal centré -->
 
         <h1>📅 Rendez-vous</h1>
-        <!-- Titre de la page -->
+        <!-- Titre principal de la page -->
 
         <table>
-        <!-- Tableau des rendez-vous -->
+        <!-- Tableau d'affichage des rendez-vous -->
 
             <thead>
             <!-- En-tête du tableau -->
 
                 <tr>
+                <!-- Ligne d'en-tête -->
+
                     <th>ID</th>
-                    <!-- Colonne id -->
+                    <!-- Colonne identifiant du rendez-vous -->
 
                     <th>Patient ID</th>
-                    <!-- Colonne patient -->
+                    <!-- Colonne identifiant du patient -->
 
                     <th>Médecin ID</th>
-                    <!-- Colonne médecin -->
+                    <!-- Colonne identifiant du médecin -->
 
                     <th>Date</th>
-                    <!-- Colonne date -->
+                    <!-- Colonne date du rendez-vous -->
 
                     <th>Motif</th>
-                    <!-- Colonne motif -->
+                    <!-- Colonne motif du rendez-vous -->
 
                     <th>Statut</th>
-                    <!-- Colonne statut -->
+                    <!-- Colonne statut du rendez-vous -->
 
                     <th>Action</th>
-                    <!-- Colonne action -->
+                    <!-- Colonne boutons d'action -->
+
                 </tr>
+                <!-- Fin de la ligne d'en-tête -->
+
             </thead>
+            <!-- Fin de l'en-tête du tableau -->
 
             <tbody>
-            <!-- Corps du tableau -->
+            <!-- Corps du tableau avec les données -->
 
                 <% if (resultatRdv && resultatRdv.length > 0) { %>
-                <!-- Vérifie si des rendez-vous existent -->
+                <!-- Vérifie si la liste des rendez-vous n'est pas vide -->
 
                     <% resultatRdv.forEach(rdv => { %>
-                    <!-- Parcourt chaque rendez-vous -->
+                    <!-- Boucle sur chaque rendez-vous de la liste -->
 
                         <tr>
+                        <!-- Ligne pour un rendez-vous -->
 
                             <td><%= rdv.id_rdv %></td>
-                            <!-- Affiche l'id -->
+                            <!-- Affiche l'identifiant du rendez-vous -->
 
                             <td><%= rdv.patient_id %></td>
-                            <!-- Affiche l'id du patient -->
+                            <!-- Affiche l'identifiant du patient -->
 
                             <td><%= rdv.medecin_id %></td>
-                            <!-- Affiche l'id du médecin -->
+                            <!-- Affiche l'identifiant du médecin -->
 
                             <td>
+                            <!-- Cellule de la date -->
+
                                 <span class="date-badge"><%= new Date(rdv.date_rdv).toLocaleString('fr-FR') %></span>
-                                <!-- Formate la date en français avec badge bleu -->
+                                <!-- Affiche la date formatée en français avec un badge bleu -->
+
                             </td>
+                            <!-- Fin de la cellule date -->
 
                             <td><%= rdv.motif %></td>
-                            <!-- Affiche le motif -->
+                            <!-- Affiche le motif du rendez-vous -->
 
                             <td>
+                            <!-- Cellule du statut -->
+
                                 <% if (rdv.statut === 'prévu') { %>
-                                <!-- Statut prévu → badge vert -->
+                                <!-- Si le statut est prévu -->
+
                                     <span class="statut-prevu"><%= rdv.statut %></span>
+                                    <!-- Affiche le statut avec badge vert -->
 
                                 <% } else if (rdv.statut === 'terminé') { %>
-                                <!-- Statut terminé → badge gris -->
+                                <!-- Si le statut est terminé -->
+
                                     <span class="statut-termine"><%= rdv.statut %></span>
+                                    <!-- Affiche le statut avec badge gris -->
 
                                 <% } else if (rdv.statut === 'annulé') { %>
-                                <!-- Statut annulé → badge rouge -->
+                                <!-- Si le statut est annulé -->
+
                                     <span class="statut-annule"><%= rdv.statut %></span>
+                                    <!-- Affiche le statut avec badge rouge -->
 
                                 <% } %>
-                                <!-- Fin de la condition statut -->
+                                <!-- Fin de la condition sur le statut -->
+
                             </td>
+                            <!-- Fin de la cellule statut -->
 
                             <td>
+                            <!-- Cellule des actions -->
+
                                 <button class="btn-supprimer" onclick="supprimerRdv(<%= rdv.id_rdv %>)">🗑️ Supprimer</button>
-                                <!-- Bouton supprimer -->
+                                <!-- Bouton pour supprimer le rendez-vous -->
+
                             </td>
+                            <!-- Fin de la cellule actions -->
 
                         </tr>
-                        <!-- Fin de la ligne -->
+                        <!-- Fin de la ligne du rendez-vous -->
 
                     <% }) %>
-                    <!-- Fin de la boucle -->
+                    <!-- Fin de la boucle forEach -->
 
                 <% } else { %>
-                <!-- Si aucun rendez-vous -->
+                <!-- Si aucun rendez-vous n'existe -->
 
                     <tr>
+                    <!-- Ligne de message vide -->
+
                         <td colspan="7" style="text-align:center; color:#999;">
+                        <!-- Cellule fusionnée sur 7 colonnes -->
+
                             Aucun rendez-vous pour le moment
+                            <!-- Message affiché quand la liste est vide -->
+
                         </td>
-                        <!-- Message si liste vide -->
+                        <!-- Fin de la cellule -->
+
                     </tr>
+                    <!-- Fin de la ligne vide -->
 
                 <% } %>
                 <!-- Fin du if/else -->
 
             </tbody>
+            <!-- Fin du corps du tableau -->
 
         </table>
         <!-- Fin du tableau -->
 
         <h2>Ajouter un Rendez-vous</h2>
-        <!-- Titre du formulaire -->
+        <!-- Titre du formulaire d'ajout -->
 
         <form action="/api/rendezvous" method="POST">
-        <!-- Formulaire d'ajout -->
+        <!-- Formulaire qui envoie les données en POST vers l'API -->
 
-            <input type="number" name="patient_id" placeholder="ID du patient" required>
-            <!-- Champ id patient -->
+            <div class="form-group">
+            <!-- Groupe champ + label pour l'id patient -->
 
-            <input type="number" name="medecin_id" placeholder="ID du médecin" required>
-            <!-- Champ id médecin -->
+                <label for="patient_id">ID du patient</label>
+                <!-- Label visible au-dessus du champ patient -->
 
-            <input type="datetime-local" name="date_rdv" required>
-            <!-- Champ date et heure -->
+                <input type="number" id="patient_id" name="patient_id" placeholder="ID du patient" required>
+                <!-- Champ numérique pour saisir l'id du patient -->
 
-            <input type="text" name="motif" placeholder="Motif" required>
-            <!-- Champ motif -->
+            </div>
+            <!-- Fin du groupe patient -->
 
-            <select name="statut" required>
-            <!-- Menu déroulant statut -->
+            <div class="form-group">
+            <!-- Groupe champ + label pour l'id médecin -->
 
-                <option value="">-- Choisir un statut --</option>
-                <!-- Option par défaut -->
+                <label for="medecin_id">ID du médecin</label>
+                <!-- Label visible au-dessus du champ médecin -->
 
-                <option value="prévu">Prévu</option>
-                <!-- Statut prévu -->
+                <input type="number" id="medecin_id" name="medecin_id" placeholder="ID du médecin" required>
+                <!-- Champ numérique pour saisir l'id du médecin -->
 
-                <option value="annulé">Annulé</option>
-                <!-- Statut annulé -->
+            </div>
+            <!-- Fin du groupe médecin -->
 
-                <option value="terminé">Terminé</option>
-                <!-- Statut terminé -->
+            <div class="form-group">
+            <!-- Groupe champ + label pour la date -->
 
-            </select>
-            <!-- Fin du menu déroulant -->
+                <label for="date_rdv">Date et heure</label>
+                <!-- Label visible au-dessus du champ date -->
+
+                <input type="datetime-local" id="date_rdv" name="date_rdv" required>
+                <!-- Champ pour choisir la date et l'heure du rendez-vous -->
+
+            </div>
+            <!-- Fin du groupe date -->
+
+            <div class="form-group">
+            <!-- Groupe champ + label pour le motif -->
+
+                <label for="motif">Motif</label>
+                <!-- Label visible au-dessus du champ motif -->
+
+                <input type="text" id="motif" name="motif" placeholder="Motif" required>
+                <!-- Champ texte pour saisir le motif du rendez-vous -->
+
+            </div>
+            <!-- Fin du groupe motif -->
+
+            <div class="form-group">
+            <!-- Groupe champ + label pour le statut -->
+
+                <label for="statut">Statut</label>
+                <!-- Label visible au-dessus du menu déroulant -->
+
+                <select id="statut" name="statut" required>
+                <!-- Menu déroulant pour choisir le statut -->
+
+                    <option value="">-- Choisir un statut --</option>
+                    <!-- Option par défaut non sélectionnable -->
+
+                    <option value="prévu">Prévu</option>
+                    <!-- Option statut prévu -->
+
+                    <option value="annulé">Annulé</option>
+                    <!-- Option statut annulé -->
+
+                    <option value="terminé">Terminé</option>
+                    <!-- Option statut terminé -->
+
+                </select>
+                <!-- Fin du menu déroulant -->
+
+            </div>
+            <!-- Fin du groupe statut -->
 
             <button type="submit">➕ Ajouter Rendez-vous</button>
-            <!-- Bouton d'envoi -->
+            <!-- Bouton pour soumettre le formulaire -->
 
         </form>
         <!-- Fin du formulaire -->
 
     </div>
-    <!-- Fin du conteneur -->
+    <!-- Fin du conteneur principal -->
+
+    <style>
+    /* Styles pour les groupes du formulaire */
+
+        .form-group {
+            display: flex;
+            /* Affichage en colonne pour empiler label et input */
+
+            flex-direction: column;
+            /* Label au-dessus, input en dessous */
+
+            margin-bottom: 10px;
+            /* Espace entre chaque groupe de champ */
+        }
+
+        .form-group label {
+            font-size: 12px;
+            /* Taille du texte du label */
+
+            color: #666;
+            /* Couleur grise pour le label */
+
+            margin-bottom: 4px;
+            /* Espace entre le label et l'input */
+
+            font-weight: 500;
+            /* Texte légèrement gras */
+        }
+
+    </style>
+    <!-- Fin des styles -->
 
     <script>
+    /* Script JavaScript pour la suppression */
 
         function supprimerRdv(id) {
-        // Fonction de suppression d'un rendez-vous
+        /* Fonction appelée au clic sur le bouton supprimer */
 
             fetch(`/api/rendezvous/${id}`, { method: 'DELETE' })
-            // Envoie la requête DELETE avec l'id
+            /* Envoie une requête DELETE à l'API avec l'id du rendez-vous */
 
             .then(res => {
-            // Quand le serveur répond
+            /* Quand le serveur répond */
 
                 if (res.ok) location.reload();
-                // Recharge la page si succès
+                /* Si la suppression a réussi, recharge la page */
+
             })
             .catch(err => alert("Erreur lors de la suppression"));
-            // Affiche une erreur si problème
+            /* Affiche une alerte en cas d'erreur réseau */
         }
 
     </script>
     <!-- Fin du script -->
 
 </body>
+<!-- Fin du corps de la page -->
+
 </html>
+<!-- Fin du document HTML -->
