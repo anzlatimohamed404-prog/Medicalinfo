@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<!-- Déclaration du type de document HTML5 -->
+<html lang="fr">
+<!-- Balise racine avec langue française -->
+<head>
+    <!-- En-tête du document -->
+    <meta charset="UTF-8">
+    <!-- Encodage UTF-8 pour supporter les accents -->
+    
+    <title>Recherche - Medicalinfo</title>
+    <!-- Titre de la page affiché dans l'onglet du navigateur -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Lien vers le fichier CSS pour les styles -->
+</head>
+<body>
+    <!-- Début du corps de la page -->
+
+    <!-- Barre de navigation -->
+    <nav>
+        <!-- Navigation avec liens vers les différentes sections -->
+        
+        <a href="/api/accueil">🏠 Accueil</a>
+        <!-- Lien vers la page d'accueil -->
+        
+        <a href="/api/patients">👤 Patients</a>
+        <!-- Lien vers la page des patients -->
+        
+        <a href="/api/medecins">🩺 Médecins</a>
+        <!-- Lien vers la page des médecins -->
+        
+        <a href="/api/services">🏥 Services</a>
+        <!-- Lien vers la page des services -->
+        
+        <a href="/api/rendezvous">📅 Rendez-vous</a>
+        <!-- Lien vers la page des rendez-vous -->
+        
+        <a href="/recherche">🔍 Recherche</a>
+        <!-- Lien vers la page de recherche (page actuelle) -->
+    </nav>
+    <!-- Fin de la navigation -->
+
+    <div class="container">
+    <!-- Conteneur principal centré -->
+
+        <h1>🔍 Recherche de Patient</h1>
+        <!-- Titre principal de la page de recherche -->
+
+        <!-- Formulaire de recherche -->
+        <form method="GET" action="/recherche" style="background-color: white; padding: 20px; border-radius: 10px; margin-bottom: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.08);">
+        <!-- Formulaire avec GET pour afficher les résultats sur la même page -->
+
+            <div style="display: flex; gap: 10px;">
+            <!-- Conteneur pour aligner le champ et le bouton -->
+            
+                <input 
+                    type="text" 
+                    name="query" 
+                    placeholder="Entrer prénom, nom ou date de naissance"
+                    style="flex: 1; padding: 10px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 15px;">
+                <!-- Champ texte où l'utilisateur écrit sa recherche -->
+                
+                <button type="submit" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold;">
+                <!-- Bouton pour lancer la recherche -->
+                    🔎 Rechercher
+                </button>
+            </div>
+        </form>
+        <!-- Fin du formulaire -->
+
+        <h2>📋 Résultats de la recherche</h2>
+        <!-- Titre pour la section résultats -->
+
+        <% 
+        // Vérifie si une recherche a été effectuée et affiche les résultats
+        if (patients && patients.length > 0) { 
+        %>
+            <!-- Si des patients correspondent à la recherche -->
+
+            <table style="width: 100%; background-color: white; border-collapse: collapse; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); overflow: hidden;">
+            <!-- Tableau pour afficher les résultats -->
+            
+                <thead style="background-color: #007bff; color: white;">
+                <!-- En-tête du tableau -->
+                
+                    <tr>
+                    <!-- Ligne d'en-tête -->
+                    
+                        <th style="padding: 12px 15px; text-align: left;">Nom</th>
+                        <!-- Colonne nom -->
+                        
+                        <th style="padding: 12px 15px; text-align: left;">Prénom</th>
+                        <!-- Colonne prénom -->
+                        
+                        <th style="padding: 12px 15px; text-align: left;">Date de naissance</th>
+                        <!-- Colonne date de naissance -->
+                        
+                        <th style="padding: 12px 15px; text-align: left;">Sexe</th>
+                        <!-- Colonne sexe -->
+                        
+                        <th style="padding: 12px 15px; text-align: left;">Admission</th>
+                        <!-- Colonne date d'admission -->
+                        
+                        <th style="padding: 12px 15px; text-align: left;">Action</th>
+                        <!-- Colonne boutons d'action -->
+                    </tr>
+                    <!-- Fin de la ligne d'en-tête -->
+                </thead>
+                <!-- Fin de l'en-tête du tableau -->
+                
+                <tbody>
+                <!-- Corps du tableau avec les données -->
+                
+                    <% 
+                    // Boucle sur chaque patient trouvé
+                    patients.forEach(p => { 
+                    %>
+                        <tr style="border-bottom: 1px solid #eee;">
+                        <!-- Ligne pour un patient -->
+                        
+                            <td style="padding: 12px 15px;"><%= p.nom %></td>
+                            <!-- Affiche le nom du patient -->
+                            
+                            <td style="padding: 12px 15px;"><%= p.prenom %></td>
+                            <!-- Affiche le prénom du patient -->
+                            
+                            <td style="padding: 12px 15px;"><%= new Date(p.date_naissance).toLocaleDateString('fr-FR') %></td>
+                            <!-- Affiche la date de naissance au format français -->
+                            
+                            <td style="padding: 12px 15px;"><%= p.sexe %></td>
+                            <!-- Affiche le sexe du patient -->
+                            
+                            <td style="padding: 12px 15px;"><%= new Date(p.date_admission).toLocaleDateString('fr-FR') %></td>
+                            <!-- Affiche la date d'admission au format français -->
+                            
+                            <td style="padding: 12px 15px;">
+                            <!-- Cellule des actions -->
+                            
+                                <button onclick="supprimerPatient(<%= p.id_patient %>)" style="background-color: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; font-size: 13px;">
+                                <!-- Bouton pour supprimer le patient -->
+                                    🗑️ Supprimer
+                                </button>
+                            </td>
+                            <!-- Fin de la cellule actions -->
+                        </tr>
+                        <!-- Fin de la ligne du patient -->
+                    <% }) %>
+                    <!-- Fin de la boucle -->
+                </tbody>
+                <!-- Fin du corps du tableau -->
+            </table>
+            <!-- Fin du tableau des résultats -->
+            
+        <% } else { %>
+            <!-- Si aucun patient n'a été trouvé ou aucune recherche n'a été effectuée -->
+
+            <div style="background-color: white; padding: 20px; border-radius: 10px; text-align: center; color: #999; box-shadow: 0 2px 10px rgba(0,0,0,0.08);">
+            <!-- Message d'information centré -->
+            
+                <p>Aucun patient trouvé. Essaie une autre recherche.</p>
+                <!-- Message affiché quand il n'y a pas de résultats -->
+            </div>
+        <% } %>
+        <!-- Fin du if/else -->
+
+        <div class="accueil-cards" style="margin-top: 40px;">
+        <!-- Section des cartes pour revenir aux autres sections -->
+
+            <a href="/api/patients" class="card">👤 Patients</a>
+            <!-- Carte vers la page patients -->
+
+            <a href="/api/medecins" class="card">🩺 Médecins</a>
+            <!-- Carte vers la page médecins -->
+
+            <a href="/api/services" class="card">🏥 Services</a>
+            <!-- Carte vers la page services -->
+
+            <a href="/api/rendezvous" class="card">📅 Rendez-vous</a>
+            <!-- Carte vers la page rendez-vous -->
+
+        </div>
+        <!-- Fin des cartes -->
+
+    </div>
+    <!-- Fin du conteneur -->
+
+    <script>
+    /* Script JavaScript pour la suppression */
+
+        function supprimerPatient(id) {
+        /* Fonction appelée au clic sur le bouton supprimer */
+
+            if (confirm('Êtes-vous sûr de vouloir supprimer ce patient ?')) {
+            /* Demande confirmation avant suppression */
+
+                fetch(`/api/patients/${id}`, { method: 'DELETE' })
+                /* Envoie une requête DELETE à l'API avec l'id du patient */
+
+                .then(res => {
+                /* Quand le serveur répond */
+
+                    if (res.ok) {
+                    /* Si la suppression a réussi */
+
+                        alert('Patient supprimé avec succès');
+                        /* Affiche un message de confirmation */
+
+                        location.reload();
+                        /* Recharge la page pour mettre à jour la liste */
+                    } else {
+                        alert('Erreur lors de la suppression');
+                    }
+                })
+                .catch(err => alert("Erreur réseau lors de la suppression"));
+                /* Affiche une alerte en cas d'erreur réseau */
+            }
+        }
+    </script>
+    <!-- Fin du script -->
+
+</body>
+<!-- Fin du corps de la page -->
+</html>
+<!-- Fin du document HTML -->

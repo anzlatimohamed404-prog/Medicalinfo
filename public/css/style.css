@@ -13,7 +13,7 @@
 
 body {
     
-    /* Police moderne et lisible */
+    /* Ajout de l'image dans les 4 partie*/
     font-family: 'Segoe UI', sans-serif;
     background-image:  url(/image/CHM.jpg);
 
@@ -542,10 +542,85 @@ tbody tr:hover {
     /* Texte en gras */
     font-weight: bold;
 }
-
+/* Ajout de l'image d'accueil (arriére plan)*/
 .accueil-bg {
     background-image:  url(/image/font-accueil.jpg.jpg);
     background-size:  cover;
     background-position:  center;
     background-repeat:  no-repeat;
+}
+
+/* ===== STYLE GENERAL DE LA PAGE ===== */
+body {
+    font-family: Arial, sans-serif; /* Police simple */
+    background-color: #f4f6f9; /* Fond gris clair */
+    margin: 0; /* Supprime les marges */
+    padding: 0;
+}
+
+/* ===== TITRE ===== */
+h2 {
+    text-align: center; /* Centre le texte */
+    margin-top: 30px; /* Espace en haut */
+    color: #333; /* Couleur du texte */
+}
+
+/* ===== FORMULAIRE ===== */
+form {
+    display: flex; /* Met input + bouton sur la même ligne */
+    justify-content: center; /* Centre horizontalement */
+    margin: 20px;
+    background: white; /* Fond blanc */
+    padding: 15px; /* Espace intérieur */
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Ombre */
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ===== CHAMP INPUT ===== */
+input {
+    padding: 10px; /* Espace interne */
+    width: 250px; /* Largeur */
+    border: 1px solid #ccc; /* Bordure */
+    border-radius: 5px; /* Coins arrondis */
+    margin-right: 10px; /* Espace avec bouton */
+}
+
+/* ===== BOUTON ===== */
+button {
+    padding: 10px 15px;
+    background-color: #e9229d; /* Bleu */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; /* Curseur main */
+}
+
+/* Effet au survol */
+button:hover {
+    background-color: #141414;
+}
+
+/* ===== LISTE RESULTATS ===== */
+ul {
+    list-style: none; /* Supprime les puces */
+    padding: 0;
+    max-width: 400px;
+    margin: 20px auto; /* Centre */
+}
+
+/* ===== CHAQUE PATIENT ===== */
+li {
+    background: white;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Effet hover */
+li:hover {
+    background-color: #f1f1f1;
 }

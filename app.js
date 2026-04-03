@@ -352,6 +352,41 @@ app.delete('/api/rendezvous/:id', (req, res) => {
     });
 });
 
+// Route pour afficher la page recherche
+app.get('/recherche', (req, res) => {
+
+    // On récupère ce que l'utilisateur a tapé dans l'input
+    // (req.query.query vient du formulaire)
+    const query = req.query.query?.toLowerCase();
+
+    // Exemple de liste de patients (à remplacer plus tard par une base de données)
+    let patients = [
+        { prenom: "zamrati", dateNaissance: "2010-04-24" },
+        { prenom: "habachia", dateNaissance: "2002-06-03" },
+        { prenom: "andjouzati", dateNaissance: "2000-11-23" }
+    ];
+
+    // Tableau vide pour stocker les résultats
+    let resultats = [];
+
+    // Si l'utilisateur a écrit quelque chose
+    if (query) {
+
+        // On filtre les patients
+        resultats = patients.filter(p =>
+
+            // Vérifie si le prénom contient ce que l'utilisateur a tapé
+            p.prenom.toLowerCase().includes(query)
+
+            // OU si la date correspond
+            || p.dateNaissance.includes(query)
+        );
+    }
+
+    // On envoie les résultats à la page recherche.ejs
+    res.render('recherche', { patients: resultats });
+});
+
 
 // ==========================
 // EXPORT
